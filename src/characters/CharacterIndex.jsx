@@ -6,7 +6,7 @@ const CharacterIndex = (props) => {
     return (
         <div>
             <CharacterTable />
-            <CharacterCreate token={props.token} />
+            <CharacterCreate token={props.token}/>
         </div>
     )
 }

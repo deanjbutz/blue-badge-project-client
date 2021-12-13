@@ -1,7 +1,8 @@
 import './App.css';
 import FetchPractice from './components/FetchPractice/FetchPractice';
 import React, { useEffect, useState } from 'react';
-import Auth from './auth/Auth'
+import Auth from './auth/Auth';
+import CharacterIndex from './characters/CharacterIndex';
 require('dotenv').config();
 
 
@@ -29,6 +30,7 @@ function App() {
   return (
     <div className="App">
       <Auth updateToken={updateToken}/>
+      <CharacterIndex />
     </div>
   );
 }

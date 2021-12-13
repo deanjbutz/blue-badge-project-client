@@ -21,9 +21,12 @@ const Signup = (props) => {
             })
             })
             .then(res => res.json())
-            .then(data => props.updateToken(data.sessionToken))
+            .then(data => {
+                props.updateToken(data.sessionToken);
+                console.log(data);
+            })
         } else {
-            alert("Please enter a Username")
+            alert("Please enter a Email")
         }
         
     }
@@ -33,8 +36,8 @@ const Signup = (props) => {
             <h1>Sign Up</h1>
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
-                    <Label htmlFor="username">Username</Label>
-                    <Input onChange={(e) => setUsername(e.target.value)} name="username" value={username} />
+                    <Label htmlFor="email">Email</Label>
+                    <Input onChange={(e) => setEmail(e.target.value)} name="email" value={email} />
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password">Password</Label>

@@ -121,9 +121,13 @@ const CharacterCreate = (props) => {
     //! character backstory
     const [characterBackstory, setCharacterBackstory] = useState('')
 
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        const payload = JSON.parse(window.atob(props.token.split('.')[1]))
+
         fetch(`http://localhost:3025/character/`, {
             method: "POST",
             body: JSON.stringify({ 
@@ -152,7 +156,7 @@ const CharacterCreate = (props) => {
                 "height": height,
                 "weight": weight,
                 "characterBackstory": characterBackstory,
-                "owner_id": 1234
+                "owner_id": payload.id
             }),
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -161,6 +165,7 @@ const CharacterCreate = (props) => {
         })
         .then(res => res.json())
         .then(data => console.log(data))
+        .then(props.fetchCharacters())
         .catch(err => console.log(err))
     }
 
@@ -180,6 +185,7 @@ const CharacterCreate = (props) => {
     useEffect(() => {
         setAbilityScoreTotal()
     }, [score, strength, dexterity, constitution, intelligence, wisdom, charisma])
+
 
     return (
         <div>

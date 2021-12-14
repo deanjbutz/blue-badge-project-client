@@ -185,15 +185,9 @@ const CharacterEdit = (props) => {
         <div>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <h3>CharacterEdit</h3>
-<<<<<<< HEAD
-
-                {/*//! Race Dropdown */}
-                <Label htmlFor="race">Race: </Label>
-=======
                 
                 {/* //! Race Dropdown */}
                 <label htmlFor="race">Race:</label>
->>>>>>> c79df8834b71578ceaa4e4a195c6b9cea9bfe17c
                 <select name="race" id="race" onChange={(e) => setRace(e.target.value)}>
                     <option >Please select a race</option>
                     {

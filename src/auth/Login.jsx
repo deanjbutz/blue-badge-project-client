@@ -27,12 +27,8 @@ const Login = (props) => {
                 props.updateToken(data.token);
                 alert(data.message);
             })
-<<<<<<< HEAD
-            .catch(err => alert(err))
-=======
             .then(props.toggleLoginSignup())
 
->>>>>>> c79df8834b71578ceaa4e4a195c6b9cea9bfe17c
         } else {
             alert("Please enter an Email")
         }
@@ -49,11 +45,7 @@ const Login = (props) => {
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password">Password</Label>
-<<<<<<< HEAD
-                    <Input required type="password" minLength={5} onChange={(e) => setPassword(e.target.value)} name="password" value={password} />
-=======
                     <Input required type='password' minLength={5} onChange={(e) => setPassword(e.target.value)} name="password" value={password} />
->>>>>>> c79df8834b71578ceaa4e4a195c6b9cea9bfe17c
                 </FormGroup>
                 <Button type="submit" >Login</Button>
             </Form>

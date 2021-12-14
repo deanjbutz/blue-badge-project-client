@@ -120,21 +120,13 @@ const CharacterCreate = (props) => {
     const [weight, setWeight] = useState(0)
     //! character backstory
     const [characterBackstory, setCharacterBackstory] = useState('')
-<<<<<<< HEAD
-=======
 
     
->>>>>>> c79df8834b71578ceaa4e4a195c6b9cea9bfe17c
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const payload = JSON.parse(window.atob(props.token.split('.')[1]))
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> c79df8834b71578ceaa4e4a195c6b9cea9bfe17c
         fetch(`http://localhost:3025/character/`, {
             method: "POST",
             body: JSON.stringify({ 
@@ -193,10 +185,6 @@ const CharacterCreate = (props) => {
         setAbilityScoreTotal()
     }, [score, strength, dexterity, constitution, intelligence, wisdom, charisma])
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c79df8834b71578ceaa4e4a195c6b9cea9bfe17c
     return (
         <div>
             <form onSubmit={(e) => handleSubmit(e)}>

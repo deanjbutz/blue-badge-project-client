@@ -74,15 +74,11 @@ const CharacterTable = (props) => {
                     }
                 </tbody>
             </Table>
-<<<<<<< HEAD
-            <CharacterView character={character} token={props.token}/>
-=======
             {
                 viewCharacter ?
                 <CharacterView toggleViewCharacter={toggleViewCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters}/> :
                 null
             }
->>>>>>> c79df8834b71578ceaa4e4a195c6b9cea9bfe17c
         </div>
     )
 }

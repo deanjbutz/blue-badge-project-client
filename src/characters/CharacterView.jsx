@@ -1,22 +1,4 @@
 import React, {useState} from 'react';
-<<<<<<< HEAD
-import { Button, Table } from 'reactstrap';
-
-const CharacterView = (props) => {
-
-    const deleteCharater = (character) => {
-        fetch(`http://localhost:3025/character/${character.id}`, {
-            method: 'DELETE',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': props.token
-            })
-            // .then(() => props.fetchCharacters())
-            .then(res => res.json())
-            .then(data => console.log(data))
-            // .then() //! do we need something here to close
-        })
-=======
 import { Table, Button, Modal } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -45,17 +27,15 @@ const CharacterView = (props) => {
         // .then(data => console.log(data))
         .catch(err => console.log(err))
         // .then() //! do we need something here to close the character view "window"
->>>>>>> c79df8834b71578ceaa4e4a195c6b9cea9bfe17c
     }
 
     return (
         <div>
         {/* <Modal isOpen={true}> */}
-            <h3>CharacterView</h3>
+            <h3>{props.character.name}</h3>
             <Table striped>
                 <thead>
                     <tr>
-                        <td>Name</td>
                         <td>Race</td>
                         <td>Class</td>
                         <td>Background</td>
@@ -80,12 +60,10 @@ const CharacterView = (props) => {
                         <td>Height</td>
                         <td>Weight</td>
                         <td>Character Backstory</td>
-                        <td>owner_id</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{props.character.name}</td>
                         <td>{props.character.race}</td>
                         <td>{props.character.chrClass}</td>
                         <td>{props.character.background}</td>
@@ -110,7 +88,6 @@ const CharacterView = (props) => {
                         <td>{props.character.height}</td>
                         <td>{props.character.weight}</td>
                         <td>{props.character.characterBackstory}</td>
-                        <td>{props.character.owner_id}</td>
                         <td>
                             <Button color="warning" onClick={() => {props.editCharacter(props.character); props.updateOn()}}>Edit</Button>
                         </td>
@@ -120,12 +97,7 @@ const CharacterView = (props) => {
                     </tr>
                 </tbody>
             </Table>
-<<<<<<< HEAD
-            <Button color="warning" onClick={() => {props.editCharacter(props.character); props.updateOn()}}>Edit</Button>
-            <Button color="danger" onClick={() => {deleteCharater(props.character)}}>Delete</Button>
-=======
         {/* </Modal> */}
->>>>>>> c79df8834b71578ceaa4e4a195c6b9cea9bfe17c
         </div>
     )
 }

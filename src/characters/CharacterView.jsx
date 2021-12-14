@@ -5,7 +5,6 @@ const CharacterView = (props) => {
     return (
         <div>
             <h3>CharacterView</h3>
-
             <Table striped>
                 <thead>
                     <tr>
@@ -68,8 +67,6 @@ const CharacterView = (props) => {
                     </tr>
                 </tbody>
             </Table>
-
-
         </div>
     )
 }

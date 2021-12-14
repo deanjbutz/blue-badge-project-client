@@ -66,8 +66,6 @@ const CharacterTable = (props) => {
                     }
                 </tbody>
             </Table>
-            {/* {fetchCharacters()} */}
-            {/* <button onClick={fetchCharacters}>Get Characters</button> */}
             <CharacterView character={character}/>
         </div>
     )

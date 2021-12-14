@@ -25,10 +25,11 @@ const Signup = (props) => {
             .then(res => res.json())
             .then(data => {
                 props.updateToken(data.token);
-                console.log(data);
+                alert(data.message);
             })
+            .then(props.toggleLoginSignup())
         } else {
-            alert("Please enter a Email")
+            alert("Failed to sign up. Please try again.")
         }
         
     }
@@ -39,11 +40,11 @@ const Signup = (props) => {
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
                     <Label htmlFor="email">Email</Label>
-                    <Input onChange={(e) => setEmail(e.target.value)} name="email" value={email} />
+                    <Input required type="email" onChange={(e) => setEmail(e.target.value)} name="email" value={email} />
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password">Password</Label>
-                    <Input onChange={(e) => setPassword(e.target.value)} name="password" value={password} />
+                    <Input required type='password' minLength={5} onChange={(e) => setPassword(e.target.value)} name="password" value={password} />
                 </FormGroup>
                 <Button type="submit">Sign Up</Button>
             </Form>

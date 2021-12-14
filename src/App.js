@@ -4,14 +4,14 @@ import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar/Navbar';
 import Auth from './auth/Auth';
 import CharacterIndex from './characters/CharacterIndex';
-import { Modal } from 'reactstrap'
+import {Modal} from 'reactstrap'
 require('dotenv').config();
 
 
 function App() {
 
   const [sessionToken, setSessionToken] = useState('');
-  const [loginSignup, setLoginSignup] = useState(true)
+  const [loginSignup, setLoginSignup] =useState(true)
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -40,16 +40,18 @@ function App() {
     toggleLoginSignup()
   }, [sessionToken])
 
+
   return (
     <div className="App">
-      <Navbar clearSession={clearToken} toggleLoginSignup={toggleLoginSignup} />
+      <Navbar clearSession={clearToken} toggleLoginSignup={toggleLoginSignup}/>
       {
-        (loginSignup && !localStorage.getItem('token')) ?
-          <Auth updateToken={updateToken} toggleLoginSignup={toggleLoginSignup} /> :
-          null
+        (loginSignup && (
+          !localStorage.getItem('token') ||
+          !localStorage.getItem('token').includes('Bearer'))) ? 
+        <Auth updateToken={updateToken} toggleLoginSignup={toggleLoginSignup}/> : 
+        null
       }
-
-      <CharacterIndex token={sessionToken} />
+      <CharacterIndex token={sessionToken}/>
     </div>
   );
 }

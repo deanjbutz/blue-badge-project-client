@@ -2,63 +2,10 @@ import React, {useState} from 'react';
 import { Table } from 'reactstrap';
 
 const CharacterView = (props) => {
-
-    const [pies, setPies] = useState('')
-
-    const getCharacters = (charcater) => {
-        fetch(`http://localhost:3025/character`, {
-            method: 'GET',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-            })
-        })
-            // .then(() => props.fetchCharacters())
-            .then(res => res.json())
-        .then(data => setPies(data))
-        .catch(err => console.log(err))
-    }
-    console.log(props.character)
-    getCharacters()
-
-    const characterMapper = () => {
-        return props.character.map((character, index) => {
-            return (
-                <tr key={index}>
-                    <th scope="row">{character.id}</th>
-                    <td>{character.race}</td>
-                    <td>{character.chrClass}</td>
-                    <td>{character.background}</td>
-                    <td>{character.level}</td>
-                    <td>{character.stength}</td>
-                    <td>{character.dexterity}</td>
-                    <td>{character.intelligence}</td>
-                    <td>{character.wisdom}</td>
-                    <td>{character.charisma}</td>
-                    <td>{character.classSkill}</td>
-                    <td>{character.backgroundTool}</td>
-                    <td>{character.raceLanguage}</td>
-                    <td>{character.fightingStyle}</td>
-                    <td>{character.backgroundSpeciality}</td>
-                    <td>{character.hitPoints}</td>
-                    <td>{character.knownSpell}</td>
-                    <td>{character.armor}</td>
-                    <td>{character.weapon}</td>
-                    <td>{character.tool}</td>
-                    <td>{character.name}</td>
-                    <td>{character.gender}</td>
-                    <td>{character.height}</td>
-                    <td>{character.weight}</td>
-                    <td>{character.characterBackstory}</td>
-                    <td>{character.owner_id}</td>
-                </tr>
-            )
-        })
-    }
-
     return (
-        <>
-            <h3>Characters</h3>
-            <hr />
+        <div>
+            <h3>CharacterView</h3>
+
             <Table striped>
                 <thead>
                     <tr>
@@ -91,10 +38,39 @@ const CharacterView = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* {characterMapper()} */}
+                    <tr>
+                        <td>{props.character.race}</td>
+                        <td>{props.character.chrClass}</td>
+                        <td>{props.character.background}</td>
+                        <td>{props.character.level}</td>
+                        <td>{props.character.strength}</td>
+                        <td>{props.character.dexterity}</td>
+                        <td>{props.character.constitution}</td>
+                        <td>{props.character.intelligence}</td>
+                        <td>{props.character.wisdom}</td>
+                        <td>{props.character.charisma}</td>
+                        <td>{props.character.classSkill}</td>
+                        <td>{props.character.backgroundTool}</td>
+                        <td>{props.character.raceLanguage}</td>
+                        <td>{props.character.fightingStyle}</td>
+                        <td>{props.character.backgroundSpeciality}</td>
+                        <td>{props.character.hitPoints}</td>
+                        <td>{props.character.knownSpell}</td>
+                        <td>{props.character.armor}</td>
+                        <td>{props.character.weapon}</td>
+                        <td>{props.character.tool}</td>
+                        <td>{props.character.name}</td>
+                        <td>{props.character.gender}</td>
+                        <td>{props.character.height}</td>
+                        <td>{props.character.weight}</td>
+                        <td>{props.character.characterBackstory}</td>
+                        <td>{props.character.owner_id}</td>
+                    </tr>
                 </tbody>
             </Table>
-        </>
+
+
+        </div>
     )
 }
 

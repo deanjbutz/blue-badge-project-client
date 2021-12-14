@@ -64,7 +64,7 @@ const CharacterCreate = (props) => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit()}>
+            <form onSubmit={(e) => handleSubmit(e)}>
                 <h3>CharacterCreate</h3>
                 
                 {/* //! Race Dropdown */}

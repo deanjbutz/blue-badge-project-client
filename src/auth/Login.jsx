@@ -27,7 +27,7 @@ const Login = (props) => {
             })
 
         } else {
-            alert("Please enter a Email")
+            alert("Please enter an Email")
         }
         
     }
@@ -38,11 +38,11 @@ const Login = (props) => {
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
                     <Label htmlFor="email">Email</Label>
-                    <Input onChange={(e) => setEmail(e.target.value)} name="email" value={email} />
+                    <Input required type="email" onChange={(e) => setEmail(e.target.value)} name="email" value={email} />
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password">Password</Label>
-                    <Input onChange={(e) => setPassword(e.target.value)} name="password" value={password} />
+                    <Input required type='password' minLength={5} onChange={(e) => setPassword(e.target.value)} name="password" value={password} />
                 </FormGroup>
                 <Button type="submit">Login</Button>
             </Form>

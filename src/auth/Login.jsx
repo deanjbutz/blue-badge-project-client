@@ -23,8 +23,9 @@ const Login = (props) => {
             .then(res => res.json())
             .then(data => {
                 props.updateToken(data.token);
-                console.log(data);
+                alert(data.message);
             })
+            .then(props.toggleLoginSignup())
 
         } else {
             alert("Please enter an Email")
@@ -44,7 +45,7 @@ const Login = (props) => {
                     <Label htmlFor="password">Password</Label>
                     <Input required type='password' minLength={5} onChange={(e) => setPassword(e.target.value)} name="password" value={password} />
                 </FormGroup>
-                <Button type="submit">Login</Button>
+                <Button type="submit" >Login</Button>
             </Form>
         </div>
     )

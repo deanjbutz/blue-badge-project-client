@@ -6,7 +6,11 @@ const CharacterIndex = (props) => {
     return (
         <div>
             <CharacterTable />
-            <CharacterCreate token={props.token}/>
+            {
+                (localStorage.getItem('token')) ?
+                <CharacterCreate token={props.token} /> :
+                null
+            }
         </div>
     )
 }

@@ -23,10 +23,11 @@ const Signup = (props) => {
             .then(res => res.json())
             .then(data => {
                 props.updateToken(data.token);
-                console.log(data);
+                alert(data.message);
             })
+            .then(props.toggleLoginSignup())
         } else {
-            alert("Please enter a Email")
+            alert("Failed to sign up. Please try again.")
         }
         
     }

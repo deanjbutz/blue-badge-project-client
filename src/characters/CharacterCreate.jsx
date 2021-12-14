@@ -185,9 +185,9 @@ const CharacterCreate = (props) => {
         <div>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <h3>CharacterCreate</h3>
-
-                {/*//! Race Dropdown */}
-                <Label htmlFor="race">Race: </Label>
+                
+                {/* //! Race Dropdown */}
+                <label htmlFor="race">Race:</label>
                 <select name="race" id="race" onChange={(e) => setRace(e.target.value)}>
                     <option >Please select a race</option>
                     {

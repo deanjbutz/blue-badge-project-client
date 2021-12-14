@@ -1,7 +1,9 @@
 import './App.css';
 import FetchPractice from './components/FetchPractice/FetchPractice';
 import React, { useEffect, useState } from 'react';
-import Auth from './auth/Auth'
+import Navbar from './Navbar/Navbar';
+import Auth from './auth/Auth';
+import CharacterIndex from './characters/CharacterIndex';
 require('dotenv').config();
 
 
@@ -21,14 +23,16 @@ function App() {
         console.log(sessionToken);
     }
 
-    // const clearToken = () => {
-    //     localStorage.clear();
-    //     setSessionToken('');
-    // }
+    const clearToken = () => {
+        localStorage.clear();
+        setSessionToken('');
+    }
 
   return (
     <div className="App">
+      <Navbar clearSession={clearToken}/>
       <Auth updateToken={updateToken}/>
+      <CharacterIndex token={sessionToken}/>
     </div>
   );
 }

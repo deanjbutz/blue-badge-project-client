@@ -21,7 +21,10 @@ const Signup = (props) => {
             })
             })
             .then(res => res.json())
-            .then(data => props.updateToken(data.sessionToken))
+            .then(data => {
+                props.updateToken(data.token);
+                console.log(data);
+            })
         } else {
             alert("Please enter a Email")
         }

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap';
 
 const Login = (props) => {
     const [email, setEmail] = useState('');
@@ -7,6 +7,8 @@ const Login = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        props.toggleLoginSignup();
 
         if (email) {
             // fetch(`http://localhost:${process.env.PORT}/user/login`, {
@@ -25,7 +27,7 @@ const Login = (props) => {
                 props.updateToken(data.token);
                 console.log(data);
             })
-
+            .catch(err => alert(err))
         } else {
             alert("Please enter a Email")
         }

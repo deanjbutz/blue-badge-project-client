@@ -66,7 +66,7 @@ const CharacterTable = (props) => {
                     }
                 </tbody>
             </Table>
-            <CharacterView character={character}/>
+            <CharacterView character={character} token={props.token}/>
         </div>
     )
 }

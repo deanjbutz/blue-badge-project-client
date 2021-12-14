@@ -1,9 +1,37 @@
 import React, {useState} from 'react';
-import { Table } from 'reactstrap';
+import { Table, Button, Modal } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const CharacterView = (props) => {
+
+    const deleteCharacter = (character) => {
+
+        const payload = JSON.parse(window.atob(props.token.split('.')[1]))
+
+        fetch(`http://localhost:3025/character/${character.id}`, {
+            method: 'DELETE',
+            body: JSON.stringify({
+                "user": {
+                    "id": payload.id
+                }
+            }),
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': props.token
+            }),
+        })
+        .then(res => console.log(res))
+        .then(() => props.fetchCharacters())
+        .then(() => props.toggleViewCharacter())
+        // .then(res => res.json())
+        // .then(data => console.log(data))
+        .catch(err => console.log(err))
+        // .then() //! do we need something here to close the character view "window"
+    }
+
     return (
         <div>
+        {/* <Modal isOpen={true}> */}
             <h3>CharacterView</h3>
             <Table striped>
                 <thead>
@@ -64,9 +92,16 @@ const CharacterView = (props) => {
                         <td>{props.character.weight}</td>
                         <td>{props.character.characterBackstory}</td>
                         <td>{props.character.owner_id}</td>
+                        <td>
+                            <Button color="warning" onClick={() => {props.editCharacter(props.character); props.updateOn()}}>Edit</Button>
+                        </td>
+                        <td>
+                            <Button color="danger" onClick={() => {deleteCharacter(props.character)}}>Delete</Button>
+                        </td>
                     </tr>
                 </tbody>
             </Table>
+        {/* </Modal> */}
         </div>
     )
 }

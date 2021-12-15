@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Table } from 'reactstrap';
+import { Table, Button } from 'reactstrap';
 import CharacterView from './CharacterView'
 import CharacterEdit from './CharacterEdit';
 
@@ -31,15 +31,24 @@ const CharacterTable = (props) => {
     }
 
     const toggleViewEditCharacter = () => {
-        setViewCharacter(false)
-        // (viewEditCharacter) ?
-        // setViewEditCharacter(false) :
+        viewEditCharacter ?
+        setViewEditCharacter(false) :
         setViewEditCharacter(true)
     }
 
     return (
         <div>
-            <h1>CharacterTable</h1>
+            <h1>CharacterTable</h1> 
+            {
+                localStorage.getItem('token') ?
+                <Button onClick={props.createOn}>Create Character</Button> :
+                null
+            } 
+            {
+                viewCharacter ?
+                <CharacterView toggleViewCharacter={toggleViewCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters} toggleViewEditCharacter={toggleViewEditCharacter}/> :
+                null
+            }
             <Table>
                 <thead>
                     <tr>
@@ -67,12 +76,8 @@ const CharacterTable = (props) => {
                 </tbody>
             </Table>
             {
-                viewCharacter ?
-                <CharacterView toggleViewCharacter={toggleViewCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters} toggleViewEditCharacter={toggleViewEditCharacter}/> :
-                null
-            }
-            {
-                viewEditCharacter ?
+                (viewEditCharacter === true &&
+                localStorage.getItem('token')) ?
                 <CharacterEdit toggleViewEditCharacter={toggleViewEditCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters} fetchCharacter={fetchCharacter} toggleViewCharacter={toggleViewCharacter}/> :
                 null
             }

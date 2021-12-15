@@ -4,6 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const CharacterView = (props) => {
 
+    // (props.token) ?
+    // const payload = JSON.parse(window.atob(props.token.split('.')[1])) :
+    // null
+
+    // const payload = JSON.parse(window.atob(props.token.split('.')[1]))
+
     const deleteCharacter = (character) => {
 
         const payload = JSON.parse(window.atob(props.token.split('.')[1]))
@@ -34,6 +40,7 @@ const CharacterView = (props) => {
         <div>
         {/* <Modal isOpen={true}> */}
             <h3>CharacterView</h3>
+            <Button onClick={() => props.toggleViewCharacter()}>Close</Button>
             <Table striped>
                 <thead>
                     <tr>
@@ -93,12 +100,21 @@ const CharacterView = (props) => {
                         <td>{props.character.weight}</td>
                         <td>{props.character.characterBackstory}</td>
                         <td>{props.character.owner_id}</td>
-                        <td>
-                            <Button color="warning" onClick={() => {props.toggleViewEditCharacter()}}>Edit</Button>
-                        </td>
-                        <td>
-                            <Button color="danger" onClick={() => {deleteCharacter(props.character)}}>Delete</Button>
-                        </td>
+                        {
+                            (props.token.includes('Bearer')) ?
+                            JSON.parse(window.atob(props.token.split('.')[1])).id === props.character.owner_id ?
+                                <>
+                                    <td>
+                                    <Button color="warning" onClick={() => props.toggleViewEditCharacter()}>Edit</Button>
+                                </td>
+                                <td>
+                                    <Button color="danger" onClick={() => {deleteCharacter(props.character)}}>Delete</Button>
+                                </td>
+                                </>
+                                : null
+                            : null
+                        }
+                        
                     </tr>
                 </tbody>
             </Table>

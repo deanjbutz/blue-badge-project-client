@@ -1,10 +1,46 @@
 import React, {useState} from 'react';
-import { Table } from 'reactstrap';
+import { Table, Button, Modal } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const CharacterView = (props) => {
+
+    // (props.token) ?
+    // const payload = JSON.parse(window.atob(props.token.split('.')[1])) :
+    // null
+
+    // const payload = JSON.parse(window.atob(props.token.split('.')[1]))
+
+    const deleteCharacter = (character) => {
+
+        const payload = JSON.parse(window.atob(props.token.split('.')[1]))
+
+        fetch(`http://localhost:3025/character/${character.id}`, {
+            method: 'DELETE',
+            body: JSON.stringify({
+                "user": {
+                    "id": payload.id
+                }
+            }),
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': props.token
+            }),
+        })
+        .then(res => res.json())
+        .then(data => alert(data.message))
+        .then(() => props.fetchCharacters())
+        .then(() => props.toggleViewCharacter())
+        // .then(res => res.json())
+        // .then(data => console.log(data))
+        .catch(err => console.log(err))
+        // .then() //! do we need something here to close the character view "window"
+    }
+
     return (
         <div>
+        {/* <Modal isOpen={true}> */}
             <h3>CharacterView</h3>
+            <Button onClick={() => props.toggleViewCharacter()}>Close</Button>
             <Table striped>
                 <thead>
                     <tr>
@@ -64,9 +100,25 @@ const CharacterView = (props) => {
                         <td>{props.character.weight}</td>
                         <td>{props.character.characterBackstory}</td>
                         <td>{props.character.owner_id}</td>
+                        {
+                            (props.token.includes('Bearer')) ?
+                            JSON.parse(window.atob(props.token.split('.')[1])).id === props.character.owner_id ?
+                                <>
+                                    <td>
+                                    <Button color="warning" onClick={() => props.toggleViewEditCharacter()}>Edit</Button>
+                                </td>
+                                <td>
+                                    <Button color="danger" onClick={() => {deleteCharacter(props.character)}}>Delete</Button>
+                                </td>
+                                </>
+                                : null
+                            : null
+                        }
+                        
                     </tr>
                 </tbody>
             </Table>
+        {/* </Modal> */}
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Label } from 'reactstrap';
+import { Label, Button } from 'reactstrap';
 
 const CharacterCreate = (props) => {
     const baseURL = "https://www.dnd5eapi.co/api/"
@@ -18,7 +18,7 @@ const CharacterCreate = (props) => {
     //! classes
     const chrClassesEndpoint = `${baseURL}classes/`
     const [chrClasses, setChrClasses] = useState('')
-    const [chrClass, setChrClass] = useState('')
+    const [chrClass, setChrClass] = useState()
     const fetchChrClasses = () => {
         fetch(chrClassesEndpoint)
         .then(res => res.json())
@@ -62,8 +62,8 @@ const CharacterCreate = (props) => {
     }
     //! fighting style
     const [fightingStyle, setFightingStyle] = useState('')
-    //! background specialty
-    const [backgroundSpecialty, setBackgroundSpecialty] = useState('')
+    //! background speciality
+    const [backgroundSpeciality, setBackgroundSpeciality] = useState('')
     //! hit points
     const [hitPoints, setHitPoints] = useState(10)
     //! known spell
@@ -121,9 +121,13 @@ const CharacterCreate = (props) => {
     //! character backstory
     const [characterBackstory, setCharacterBackstory] = useState('')
 
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        const payload = JSON.parse(window.atob(props.token.split('.')[1]))
+
         fetch(`http://localhost:3025/character/`, {
             method: "POST",
             body: JSON.stringify({ 
@@ -141,7 +145,7 @@ const CharacterCreate = (props) => {
                 "backgroundTool": backgroundTool,
                 "raceLanguage": raceLanguage,
                 "fightingStyle": fightingStyle,
-                "backgroundSpeciality": backgroundSpecialty,
+                "backgroundSpeciality": backgroundSpeciality,
                 "hitPoints": hitPoints,
                 "knownSpell": knownSpell,
                 "armor": armor,
@@ -152,7 +156,7 @@ const CharacterCreate = (props) => {
                 "height": height,
                 "weight": weight,
                 "characterBackstory": characterBackstory,
-                "owner_id": 1234
+                "owner_id": payload.id
             }),
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -160,7 +164,9 @@ const CharacterCreate = (props) => {
             })
         })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => alert(data.message))
+        .then(() => props.fetchCharacters())
+        .then(() => props.createOff())
         .catch(err => console.log(err))
     }
 
@@ -181,10 +187,15 @@ const CharacterCreate = (props) => {
         setAbilityScoreTotal()
     }, [score, strength, dexterity, constitution, intelligence, wisdom, charisma])
 
+
     return (
         <div>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <h3>CharacterCreate</h3>
+                
+                <Button type="button" onClick={() => props.createOff()}>Close</Button>
+
+                <br />
                 
                 {/* //! Race Dropdown */}
                 <label htmlFor="race">Race:</label>
@@ -202,8 +213,8 @@ const CharacterCreate = (props) => {
                 
                 {/*//! Class Dropdown*/}
                 <Label htmlFor="chrClass">Class: </Label>
-                <select name="chrClass" id="chrClass" onChange={(e) => setChrClass(e.target.value)}>
-                    <option disabled selected>Please select a class</option>
+                <select required name="chrClass" id="chrClass" onChange={(e) => setChrClass(e.target.value)}>
+                    <option disabled selected defaultValue={null}>Please select a class</option>
                     {
                         (chrClasses) ?
                         chrClasses.results.map((chrClasses,id) => {
@@ -322,9 +333,9 @@ const CharacterCreate = (props) => {
                     <option value="Unarmed Fighting">Unarmed Fighting</option>
                 </select>
 
-                {/* //! Background Specialty Entry */}
-                <Label htmlFor="backgroundSpecialty">Background Specialty: </Label>
-                <textarea type="text" name="backgroundSpecialty" id="backgroundSpecialty" placeholder="Enter Background Specialty" rows="3" cols="30" onChange={(e) => setBackgroundSpecialty(e.target.value)}/>
+                {/* //! Background Speciality Entry */}
+                <Label htmlFor="backgroundSpeciality">Background Speciality: </Label>
+                <textarea type="text" name="backgroundSpeciality" id="backgroundSpeciality" placeholder="Enter Background Speciality" rows="3" cols="30" onChange={(e) => setBackgroundSpeciality(e.target.value)}/>
 
                 {/* //! Hit Points Input */}
                 <Label htmlFor="hitPoints">Hit Points: </Label>
@@ -425,7 +436,7 @@ const CharacterCreate = (props) => {
                 <p>You selected background tool: {backgroundTool}</p>
                 <p>You selected race language: {raceLanguage}</p>
                 <p>You selected fighting style: {fightingStyle}</p>
-                <p>You selected background specialty: {backgroundSpecialty}</p>
+                <p>You selected background speciality: {backgroundSpeciality}</p>
                 <p>You selected hit points: {hitPoints}</p>
                 <p>You selected known spell: {knownSpell}</p>
                 <p>You selected armor: {armor}</p>

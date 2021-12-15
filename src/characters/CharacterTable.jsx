@@ -5,8 +5,10 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-// import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+// import Paper from '@mui/material/Paper';
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import { Table, Button } from 'reactstrap';
@@ -48,47 +50,69 @@ const CharacterTable = (props) => {
             setViewEditCharacter(true)
     }
 
+    // const theme = createTheme()
+
+    //     theme.typography= {
+    //       fontFamily: [
+    //         'Quintessential', 
+    //         'cursive'
+    //       ].join(','),
+    //     }
+
+    const theme = createTheme({
+        typography: {
+            fontFamily: [
+                'Quintessential',
+                'cursive'
+            ].join(','),
+        },
+    });
+
     return (
         <div>
-            <h1>CharacterTable</h1>
-            {
-                localStorage.getItem('token') ?
-                    <Button onClick={props.createOn}>Create Character</Button> :
-                    null
-            }
-            {
-                viewCharacter ?
-                    <CharacterView toggleViewCharacter={toggleViewCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters} toggleViewEditCharacter={toggleViewEditCharacter} /> :
-                    null
-            }
-            <TableContainer>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell sx={{ border: 1 }}>Name</TableCell>
-                            <TableCell sx={{ border: 1 }}>Race</TableCell>
-                            <TableCell sx={{ border: 1 }}>Class</TableCell>
-                            <TableCell sx={{ border: 1 }}>View Character</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {
-                            (props.results) ?
-                                props.results.map((results, id) => {
-                                    return (
-                                        <TableRow key={id}>
-                                            <TableCell sx={{ border: 1 }}>{results.name}</TableCell>
-                                            <TableCell sx={{ border: 1 }}>{results.race}</TableCell>
-                                            <TableCell sx={{ border: 1 }}>{results.chrClass}</TableCell>
-                                            <TableCell sx={{ border: 1 }}>
-                                                <Button id={results.id} onClick={e => fetchCharacter(e)}>View Character</Button>
-                                            </TableCell>
-                                        </TableRow>
-                                    )
-                                }) : null
-                        }
-                    </TableBody>
-                </Table>
+            <Table id="table">
+                <h1>Character Table</h1>
+                {
+                    localStorage.getItem('token') ?
+                        <button className="btn" onClick={props.createOn}>Create Character</button> :
+                        null
+                }
+                {
+                    viewCharacter ?
+                        <CharacterView toggleViewCharacter={toggleViewCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters} toggleViewEditCharacter={toggleViewEditCharacter} /> :
+                        null
+                }
+            </Table>
+            <TableContainer id="list">
+                <ThemeProvider theme={theme}>
+                    <Table id="head">
+                        <TableHead sx={{ border: 3 }}>
+                            <TableRow>
+                                <TableCell sx={{ border: 3 }}>Name</TableCell>
+                                <TableCell sx={{ border: 3 }}>Race</TableCell>
+                                <TableCell sx={{ border: 3 }}>Class</TableCell>
+                                <TableCell sx={{ border: 3 }}>View Character</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody sx={{ border: 3 }}>
+                            {
+                                (props.results) ?
+                                    props.results.map((results, id) => {
+                                        return (
+                                            <TableRow key={id}>
+                                                <TableCell sx={{ border: 1 }}>{results.name}</TableCell>
+                                                <TableCell sx={{ border: 1 }}>{results.race}</TableCell>
+                                                <TableCell sx={{ border: 1 }}>{results.chrClass}</TableCell>
+                                                <TableCell sx={{ border: 1 }}>
+                                                    <Button className="btn2" id={results.id} onClick={e => fetchCharacter(e)}>View Character</Button>
+                                                </TableCell>
+                                            </TableRow>
+                                        )
+                                    }) : null
+                            }
+                        </TableBody>
+                    </Table>
+                </ThemeProvider>
             </TableContainer>
         </div>
     )

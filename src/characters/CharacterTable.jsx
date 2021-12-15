@@ -114,10 +114,10 @@ const CharacterTable = (props) => {
                             }
                         </TableBody>
                         {
-                            (viewEditCharacter === true &&
-                                localStorage.getItem('token')) ?
-                                <CharacterEdit toggleViewEditCharacter={toggleViewEditCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters} fetchCharacter={fetchCharacter} toggleViewCharacter={toggleViewCharacter} /> :
-                                null
+                        (viewEditCharacter === true &&
+                        localStorage.getItem('token')) ?
+                        <CharacterEdit toggleViewEditCharacter={toggleViewEditCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters} fetchCharacter={fetchCharacter} toggleViewCharacter={toggleViewCharacter}/> :
+                        null
                         }
                     </Table>
                 </ThemeProvider>

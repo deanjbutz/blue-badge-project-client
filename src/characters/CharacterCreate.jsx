@@ -115,9 +115,9 @@ const CharacterCreate = (props) => {
     //! gender
     const [gender, setGender] = useState('')
     //! height
-    const [height, setHeight] = useState(0)
+    const [height, setHeight] = useState(170)
     //! weight
-    const [weight, setWeight] = useState(0)
+    const [weight, setWeight] = useState(62)
     //! character backstory
     const [characterBackstory, setCharacterBackstory] = useState('')
 

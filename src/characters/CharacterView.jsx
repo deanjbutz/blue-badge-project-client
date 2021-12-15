@@ -20,7 +20,8 @@ const CharacterView = (props) => {
                 'Authorization': props.token
             }),
         })
-        .then(res => console.log(res))
+        .then(res => res.json())
+        .then(data => alert(data.message))
         .then(() => props.fetchCharacters())
         .then(() => props.toggleViewCharacter())
         // .then(res => res.json())
@@ -89,7 +90,7 @@ const CharacterView = (props) => {
                         <td>{props.character.weight}</td>
                         <td>{props.character.characterBackstory}</td>
                         <td>
-                            <Button color="warning" onClick={() => {props.editCharacter(props.character); props.updateOn()}}>Edit</Button>
+                            <Button color="warning" onClick={() => {props.toggleViewEditCharacter()}}>Edit</Button>
                         </td>
                         <td>
                             <Button color="danger" onClick={() => {deleteCharacter(props.character)}}>Delete</Button>

@@ -39,8 +39,10 @@ const CharacterView = (props) => {
     return (
         <div>
         {/* <Modal isOpen={true}> */}
+
             <h3>CharacterView</h3>
             <Button onClick={() => props.toggleViewCharacter()}>Close</Button>
+
             <Table striped>
                 <thead>
                     <tr>
@@ -111,7 +113,6 @@ const CharacterView = (props) => {
                                 : null
                             : null
                         }
-                        
                     </tr>
                 </tbody>
             </Table>

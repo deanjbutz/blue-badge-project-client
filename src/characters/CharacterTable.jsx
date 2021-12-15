@@ -1,5 +1,8 @@
+
 import React, { useEffect, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Table, Button } from 'reactstrap';
+
 import CharacterView from './CharacterView'
 import CharacterEdit from './CharacterEdit';
 
@@ -60,26 +63,21 @@ const CharacterTable = (props) => {
                 <tbody>
                     {
                         (props.results) ?
-                            props.results.map((results, id) => {
-                                return (
-                                    <tr key={id}>
-                                        <th>{results.name}</th>
-                                        <td>{results.race}</td>
-                                        <td>{results.chrClass}</td>
-                                        <td>
-                                            <button id={results.id} onClick={e => fetchCharacter(e)}>View Character</button>
-                                        </td>
-                                    </tr>
-                                )
-                            }) : null
-                    }
-                </tbody>
-                {
-                    (viewEditCharacter === true &&
-                        localStorage.getItem('token')) ?
-                        <CharacterEdit toggleViewEditCharacter={toggleViewEditCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters} fetchCharacter={fetchCharacter} toggleViewCharacter={toggleViewCharacter} /> :
-                        null
+
+                        props.results.map((results, id) => {
+                            return (
+                                <tr key={id}>
+                                    <th>{results.name}</th>
+                                    <td>{results.race}</td>
+                                    <td>{results.chrClass}</td>
+                                    <td>
+                                        <button id={results.id} onClick={e => fetchCharacter(e)}>View Character</button>
+                                    </td>
+                                </tr>
+                            )
+                        }) : null
                 }
+                </tbody>
             </Table>
         </div>
     )

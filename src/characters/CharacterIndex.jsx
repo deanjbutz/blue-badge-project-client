@@ -10,6 +10,7 @@ const CharacterIndex = (props) => {
     const [characterToUpdate, setCharacterToUpdate] = useState({})
     const [updateActive, setUpdateActive] = useState(false)
     const [results, setResults] = useState([])
+    const [createCharacterActive, setCreateCharacterActive] = useState(false)
 
     const editCharacter = (character) => {
         setCharacterToUpdate(character);
@@ -41,14 +42,23 @@ const CharacterIndex = (props) => {
         fetchCharacters()
     }, [])
 
+    const createOn = () => {
+        setCreateCharacterActive(true)
+    }
+
+    const createOff = () => {
+        setCreateCharacterActive(false)
+    }
+
     return (
         <div>
-            <CharacterTable token={props.token} fetchCharacters={fetchCharacters} results={results}/>
             {
-                (localStorage.getItem('token')) ?
-                <CharacterCreate token={props.token} fetchCharacters={fetchCharacters}/> :
+                (createCharacterActive === true &&
+                localStorage.getItem('token')) ?
+                <CharacterCreate token={props.token} fetchCharacters={fetchCharacters} createOff={createOff}/> :
                 null
             }
+            <CharacterTable token={props.token} fetchCharacters={fetchCharacters} results={results} createOn={createOn}/>
             {/* {
                 updateActive ?
                 <CharacterEdit characterToUpdate={characterToUpdate} updateOff={updateOff} token={props.token}/> :

@@ -11,12 +11,8 @@ import Button from '@mui/material/Button';
 // import Paper from '@mui/material/Paper';
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-<<<<<<< HEAD
 // import { Table, Button } from 'reactstrap';
 import './characterTable.css'
-=======
-import { Table, Button } from 'reactstrap';
->>>>>>> d4dcd120f503283721672c63917881030261eed0
 
 import CharacterView from './CharacterView'
 import CharacterEdit from './CharacterEdit';

@@ -1,8 +1,11 @@
-import React from "react";
+import * as React from "react";
+import ReactDOM from 'react-dom';
 import "./navbar.css"
-import { Container, Row, Col, Button, } from "reactstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import { Container, Row, Col, Button, } from "reactstrap";
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import Auth from '../auth/Auth'
+import { Grid, Box } from '@mui/material';
+
 
 const Navbar = (props) => {
 
@@ -10,26 +13,19 @@ const Navbar = (props) => {
 
     return (
 
-    
-
-        <Container fluid id="banner">
-            <Row>
-                <Col>
-                </Col>
-                <Col className="col-7 row align-items-center"  id="cntCol">
-                    <h1>Welcome To The Dungeon!</h1>
-                </Col>
-                <Col className="row-1">
-                    {
-                        (localStorage.getItem('token') &&
-                            localStorage.getItem('token').includes('Bearer')) ?
-                            <Button className="btn" onClick={props.clearSession}>Log Out</Button> :
-                            <Button className="btn" onClick={props.toggleLoginSignup}>Login/Signup</Button>
-                    }
-                </Col>
-            </Row>
-
-         </Container>
+        <Grid container spacing={5} id="banner">
+            <Grid item sx={{ mt: 2, ml:2 }} id="btn">
+            {
+                (localStorage.getItem('token') &&
+                localStorage.getItem('token').includes('Bearer')) ?
+                <button id="logout" onClick={props.clearSession}>Log Out</button> :
+                <button id="login-signup" onClick={props.toggleLoginSignup}>Login/Signup</button>
+            }
+            </Grid>
+            <Grid item xs={12} sx={{ pb: 6}} id="why">
+            <h1 id="welcome">Welcome To The Dungeon!</h1>
+            </Grid>
+        </Grid>
 
         // <nav id="nav">
         //     {/* <img src={dragon} alt="dragon" id="dragon" /> */}

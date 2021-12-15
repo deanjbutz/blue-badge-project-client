@@ -13,32 +13,33 @@ function App() {
   const [sessionToken, setSessionToken] = useState('');
   const [loginSignup, setLoginSignup] =useState(true)
 
-    useEffect(() => {
-        if (localStorage.getItem('token')) {
-        setSessionToken(localStorage.getItem('token'));
-        }
-    }, [])
-
-    const updateToken = (newToken) => {
-        localStorage.setItem('token', newToken);
-        setSessionToken(newToken);
-        console.log(sessionToken);
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      setSessionToken(localStorage.getItem('token'));
     }
+  }, [])
 
-    const clearToken = () => {
-        localStorage.clear();
-        setSessionToken('');
-    }
+  const updateToken = (newToken) => {
+    localStorage.setItem('token', newToken);
+    setSessionToken(newToken);
+    console.log(sessionToken);
+  }
 
-    const toggleLoginSignup = () => {
-      (loginSignup) ?
+  const clearToken = () => {
+    localStorage.clear();
+    setSessionToken('');
+  }
+
+  const toggleLoginSignup = () => {
+    (loginSignup) ?
       setLoginSignup(false) :
       setLoginSignup(true)
-    }
+  }
 
   useEffect(() => {
     toggleLoginSignup()
   }, [sessionToken])
+
 
   return (
     <div className="App">

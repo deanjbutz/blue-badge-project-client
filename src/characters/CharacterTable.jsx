@@ -68,6 +68,8 @@ const CharacterTable = (props) => {
         },
     });
 
+
+
     return (
         <div>
             <Table id="table">
@@ -104,7 +106,7 @@ const CharacterTable = (props) => {
                                                 <TableCell sx={{ border: 1 }}>{results.race}</TableCell>
                                                 <TableCell sx={{ border: 1 }}>{results.chrClass}</TableCell>
                                                 <TableCell sx={{ border: 1 }}>
-                                                    <Button className="btn2" id={results.id} onClick={e => fetchCharacter(e)}>View Character</Button>
+                                                    <Button variant="outlined" className="btn2" id={results.id} onClick={e => fetchCharacter(e)}>View Character</Button>
                                                 </TableCell>
                                             </TableRow>
                                         )

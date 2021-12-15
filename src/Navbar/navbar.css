@@ -29,10 +29,11 @@
     font-family: 'Niconne', cursive; 
     /* font-family: 'Quintessential', cursive; */
     /* font-size: 80px; */
-    transform: scale(1.4, 1.7);
+    /* transform: scale(1.4, 1.7); */
     text-shadow: #28100C 3px 1px 2px;
     color: #E3DAC9;
     padding-top: 0px;
+    font-size: 90px;
     /* width: 100%; */
 }
 
@@ -41,9 +42,12 @@
     font-family: 'Niconne', cursive; 
     color: #E3DAC9;
     text-shadow: #28100C 3px 1px 2px;
+    /* width: 100vw; */
+
 }
 
 #welcome {
+   
     
 }
 

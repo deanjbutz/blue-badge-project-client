@@ -1,13 +1,3 @@
-/* {
-    margin: 0;
-    padding: 0;
-} */
-
-/* #container{
-    background-image: url(../assets/banner.jpg);
-    height: 25vh;
-} */
-
 #banner {
     background-image: url(../assets/banner.jpg);
     margin-top: 0px;

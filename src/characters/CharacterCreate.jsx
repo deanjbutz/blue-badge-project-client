@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
-import { Label, Button } from 'reactstrap';
+import { Label, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import './characterCreate.css'
 
 const CharacterCreate = (props) => {
     const baseURL = "https://www.dnd5eapi.co/api/"
@@ -187,270 +188,509 @@ const CharacterCreate = (props) => {
     }, [score, strength, dexterity, constitution, intelligence, wisdom, charisma])
 
     return (
-        <div>
+        <Modal isOpen={true}  style={{maxWidth: '90vw', paddingTop: '3%'}}>
             <form onSubmit={(e) => handleSubmit(e)}>
-                <h3>CharacterCreate</h3>
+                <ModalHeader className='modal-header d-block' >
+                    <input type="text" name="name" id="name" placeholder="Enter Character Name" onChange={(e) => setName(e.target.value)}/>
+                </ModalHeader>
+                <ModalBody>
                 
-                <Button type="button" onClick={() => props.createOff()}>Close</Button>
+                    <div className='selections'>
 
-                <br />
-                
-                {/* //! Race Dropdown */}
-                <label htmlFor="race">Race:</label>
-                <select name="race" id="race" onChange={(e) => setRace(e.target.value)}>
-                    <option >Please select a race</option>
-                    {
-                        (races) ?
-                        races.results.map((races,id) => {
-                            return (
-                                <option key={id} value={races.name}>{races.name}</option>
-                            )
-                        }) : null
-                    }
-                </select>
-                
-                {/*//! Class Dropdown*/}
-                <Label htmlFor="chrClass">Class: </Label>
-                <select required name="chrClass" id="chrClass" onChange={(e) => setChrClass(e.target.value)}>
-                    <option disabled selected defaultValue={null}>Please select a class</option>
-                    {
-                        (chrClasses) ?
-                        chrClasses.results.map((chrClasses,id) => {
-                            return (
-                                <option key={id} value={chrClasses.name}>{chrClasses.name}</option>
-                            )
-                        }) : null
-                    }
-                </select>
+                        <div className="row1">
+                            <div className='chrProp text-input'>
+                                <h6>Race</h6>
+                                <select name="race" id="race" onChange={(e) => setRace(e.target.value)}>
+                                    <option >Please select a race</option>
+                                    {
+                                        (races) ?
+                                        races.results.map((races,id) => {
+                                            return (
+                                                <option key={id} value={races.name}>{races.name}</option>
+                                            )
+                                        }) : null
+                                    }
+                                </select>
+                            </div>
+                            <div className='chrProp text-input'>
+                                <h6>Class</h6>
+                                <select required name="chrClass" id="chrClass" onChange={(e) => setChrClass(e.target.value)}>
+                                    <option disabled selected defaultValue={null}>Please select a class</option>
+                                    {
+                                        (chrClasses) ?
+                                        chrClasses.results.map((chrClasses,id) => {
+                                            return (
+                                                <option key={id} value={chrClasses.name}>{chrClasses.name}</option>
+                                            )
+                                        }) : null
+                                    }
+                                </select>
+                            </div>
+                            <div className='chrProp text-input'>
+                                <h6>Background</h6>
+                                <select name="background" id="background" onChange={(e) => setBackground(e.target.value)}>
+                                    <option disabled selected>Please select a background</option>
+                                    <option value="Acolyte">Acolyte</option>
+                                    <option value="Criminal">Criminal</option>
+                                    <option value="Folk Hero">Folk Hero</option>
+                                    <option value="Noble">Noble</option>
+                                    <option value="Sage">Sage</option>
+                                    <option value="Soldier">Soldier</option>
+                                </select>
+                            </div>
+                            <div className='chrProp text-input'>
+                                <h6>Level</h6>
+                                <input type="number" name="level" id="level" defaultValue={1} min={1} max={20} onChange={(e) => setLevel(e.target.value)}/>
+                            </div>
+                        </div>
 
-                {/*//! Backgrounds Dropdown*/}
-                <Label htmlFor="background">Background: </Label>
-                <select name="background" id="background" onChange={(e) => setBackground(e.target.value)}>
-                    <option disabled selected>Please select a background</option>
-                    <option value="Acolyte">Acolyte</option>
-                    <option value="Criminal">Criminal</option>
-                    <option value="Folk Hero">Folk Hero</option>
-                    <option value="Noble">Noble</option>
-                    <option value="Sage">Sage</option>
-                    <option value="Soldier">Soldier</option>
-                </select>
+                        <div className='row2'>
+                            <div>
+                                <div className="score-tracker">
+                                    <h5 style={{whiteSpace: "normal"}}>Ability Scores</h5>
+                                    {
+                                        (score >= 0) ?
+                                        <p>{score} points remaining</p> :
+                                        <p style={{"color":"red", "font-weight": "bold"}}>Too many points - please decrease!</p>
+                                    }
+                                </div>
+                                <div className='ability-scores'>
+                                    <div className='chrProp text-input'>
+                                        <h6>Strength</h6>
+                                        <input type="number" name="strength" id="strength" defaultValue={10} min={3} max={15} onChange={(e) => setStrength(e.target.value)} />
+                                    </div>
+                                    <div className='chrProp text-input'>
+                                        <h6>Dexterirty</h6>
+                                        <input type="number" name="dexterity" id="dexterity" defaultValue={10} min={3} max={15} onChange={(e) => setDexterity(e.target.value)}/>
+                                    </div>
+                                    <div className='chrProp text-input'>
+                                        <h6>Constitution</h6>
+                                        <input type="number" name="constitution" id="constitution" defaultValue={10} min={3} max={15} onChange={(e) => setConstitution(e.target.value)}/>
+                                    </div>
+                                    <div className='chrProp text-input'>
+                                        <h6>Intelligence</h6>
+                                        <input type="number" name="intelligence" id="intelligence" defaultValue={10} min={3} max={15} onChange={(e) => setIntelligence(e.target.value)}/>
+                                    </div>
+                                    <div className='chrProp text-input'>
+                                        <h6>Wisdom</h6>
+                                        <input type="number" name="wisdom" id="wisdom" defaultValue={10} min={3} max={15} onChange={(e) => setWisdom(e.target.value)}/>
+                                    </div>
+                                    <div className='chrProp text-input'>
+                                        <h6>Charisma</h6>
+                                        <input type="number" name="charisma" id="charisma" defaultValue={10} min={3} max={15} onChange={(e) => setCharisma(e.target.value)}/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                {/* //! Level Input */}
-                <Label htmlFor="level">Level: </Label>
-                <input type="number" name="level" id="level" defaultValue={1} min={1} max={20} onChange={(e) => setLevel(e.target.value)}/>
+                        <div className="row3">
+                            <div className='chrProp text-input'>
+                                <h6>Class Skill</h6>
+                                <select name="classSkill" id="classSkill" onChange={(e) => setClassSkill(e.target.value)}>
+                                    <option disabled selected>Please select a class skill</option>
+                                    <option value="Arcana">Arcana</option>
+                                    <option value="Athletics">Athletics</option>
+                                    <option value="Bluff">Bluff</option>
+                                    <option value="Diplomacy">Diplomacy</option>
+                                    <option value="Dungeoneering">Dungeoneering</option>
+                                    <option value="Endurance">Endurance</option>
+                                    <option value="Heal">Heal</option>
+                                    <option value="History">History</option>
+                                    <option value="Insight">Insight</option>
+                                    <option value="Intimidate">Intimidate</option>
+                                    <option value="Nature">Nature</option>
+                                    <option value="Perception">Perception</option>
+                                    <option value="Religion">Religion</option>
+                                    <option value="Stealth">Stealth</option>
+                                    <option value="Streetwise">Streetwise</option>
+                                    <option value="Thievery">Thievery</option>
+                                </select>
+                            </div>
+                            <div className='chrProp text-input'>
+                                <h6>Background Tool</h6>
+                                <select name="backgroundTool" id="backgroundTool" onChange={(e) => setBackgroundTool(e.target.value)}>
+                                    <option disabled selected>Please select a background tool</option>
+                                    <option value="Artisan's Tools">Artisan's Tools</option>
+                                    <option value="Disguise Kit">Disguise Kit</option>
+                                    <option value="Forgery Kit">Forgery Kit</option>
+                                    <option value="Gaming Set">Gaming Set</option>
+                                    <option value="Herbalism Kit">Herbalism Kit</option>
+                                    <option value="Musical Instrument">Musical Instrument</option>
+                                    <option value="Navigator's Tools">Navigator's Tools</option>
+                                    <option value="Theive's Tools">Theive's Tools</option>
+                                    <option value="Vehicles - Land">Vehicles - Land</option>
+                                    <option value="Vehicles - Water">Vehicles - Water</option>
+                                </select>
+                            </div>
+                            <div className='chrProp text-input'>
+                                <h6>Race Language</h6>
+                                <select name="raceLanguage" id="raceLanguage" onChange={(e) => setRaceLanguage(e.target.value)}>
+                                    <option disabled selected>Please select a race language</option>
+                                    {
+                                        (raceLanguages) ?
+                                        raceLanguages.map((raceLanguages,id) => {
+                                            return (
+                                                <option key={id} value={raceLanguages.name}>{raceLanguages.name}</option>
+                                            )
+                                        }) : null
+                                    }
+                                </select>
+                            </div>
+                            <div className='chrProp text-input'>
+                                <h6>Fighting Style</h6>
+                                <select name="fightingStyle" id="fightingStyle" onChange={(e) => setFightingStyle(e.target.value)}>
+                                    <option disabled selected>Please select a fighting style</option>
+                                    <option value="Archery">Archery</option>
+                                    <option value="Blessed Warrior">Blessed Warrior</option>
+                                    <option value="Blind Fighting">Blind Fighting</option>
+                                    <option value="Defense">Defense</option>
+                                    <option value="Druidic Warrior">Druidic Warrior</option>
+                                    <option value="Dueling">Dueling</option>
+                                    <option value="Great Weapon Fighting">Great Weapon Fighting</option>
+                                    <option value="Interception">Interception</option>
+                                    <option value="Protection">Protection</option>
+                                    <option value="Superior Technique">Superior Technique</option>
+                                    <option value="Thrown Weapon Fighting">Thrown Weapon Fighting</option>
+                                    <option value="Two-Weapon Fighting">Two-Weapon Fighting</option>
+                                    <option value="Unarmed Fighting">Unarmed Fighting</option>
+                                </select>
+                            </div>
+                        </div>
 
-                {/* //! Ability Score Inputs */}
-                <Label htmlFor="strength">Strength: </Label>
-                <input type="number" name="strength" id="strength" defaultValue={10} min={3} max={15} onChange={(e) => setStrength(e.target.value)} />
-                <Label htmlFor="dexterity">Dexterity: </Label>
-                <input type="number" name="dexterity" id="dexterity" defaultValue={10} min={3} max={15} onChange={(e) => setDexterity(e.target.value)}/>
-                <Label htmlFor="constitution">Constitution: </Label>
-                <input type="number" name="constitution" id="constitution" defaultValue={10} min={3} max={15} onChange={(e) => setConstitution(e.target.value)}/>
-                <Label htmlFor="intelligence">Intelligence: </Label>
-                <input type="number" name="intelligence" id="intelligence" defaultValue={10} min={3} max={15} onChange={(e) => setIntelligence(e.target.value)}/>
-                <Label htmlFor="wisdom">Wisdom: </Label>
-                <input type="number" name="wisdom" id="wisdom" defaultValue={10} min={3} max={15} onChange={(e) => setWisdom(e.target.value)}/>
-                <Label htmlFor="charisma">Charisma: </Label>
-                <input type="number" name="charisma" id="charisma" defaultValue={10} min={3} max={15} onChange={(e) => setCharisma(e.target.value)}/>
-                {/* <p>Total Points: {totalPoints}</p> */}
-                {
-                    (score >= 0) ?
-                    <p>you have {score} points remaining</p> :
-                    <p style={{"color":"red", "font-weight": "bold"}}>you have {score} points remaining</p>
-                }
-                
+                        <div className="row4">
+                            <div className='chrProp text-input'>
+                                <h6>Background Speciality</h6>
+                                <textarea type="text" name="backgroundSpeciality" id="backgroundSpeciality" placeholder="Enter Background Speciality" rows="3" cols="30" onChange={(e) => setBackgroundSpeciality(e.target.value)}/>
+                            </div>
+                        </div>
 
-                {/* //! Class Skill Dropdown */}
-                <Label htmlFor="classSkill">Class Skill: </Label>
-                <select name="classSkill" id="classSkill" onChange={(e) => setClassSkill(e.target.value)}>
-                    <option disabled selected>Please select a class skill</option>
-                    <option value="Arcana">Arcana</option>
-                    <option value="Athletics">Athletics</option>
-                    <option value="Bluff">Bluff</option>
-                    <option value="Diplomacy">Diplomacy</option>
-                    <option value="Dungeoneering">Dungeoneering</option>
-                    <option value="Endurance">Endurance</option>
-                    <option value="Heal">Heal</option>
-                    <option value="History">History</option>
-                    <option value="Insight">Insight</option>
-                    <option value="Intimidate">Intimidate</option>
-                    <option value="Nature">Nature</option>
-                    <option value="Perception">Perception</option>
-                    <option value="Religion">Religion</option>
-                    <option value="Stealth">Stealth</option>
-                    <option value="Streetwise">Streetwise</option>
-                    <option value="Thievery">Thievery</option>
-                </select>
+                        <div className="row5">
+                            <div className='chrProp text-input'>
+                                <h6>Hit Points</h6>
+                                <input type="number" name="hitPoints" id="hitPoints" defaultValue={10} onChange={(e) => setHitPoints(e.target.value)}/>
+                            </div>
+                            <div className='chrProp text-input'>
+                                <h6>Known Spell</h6>
+                                <select name="knownSpell" id="knownSpell" onChange={(e) => setKnownSpell(e.target.value)}>
+                                    <option disabled selected>Please select a known spell</option>
+                                    {
+                                        (spells) ?
+                                        spells.results.map((spells,id) => {
+                                            return (
+                                                <option key={id} value={spells.name}>{spells.name}</option>
+                                            )
+                                        }) : null
+                                    }
+                                </select>
+                            </div>
+                            <div className='chrProp text-input'>
+                                <h6>Armor</h6>
+                                <select name="armor" id="armor" onChange={(e) => setArmor(e.target.value)}>
+                                    <option disabled selected>Please select an armor</option>
+                                    {
+                                        (armors) ?
+                                        armors.equipment.map((armors,id) => {
+                                            return (
+                                                <option key={id} value={armors.name}>{armors.name}</option>
+                                            )
+                                        }) : null
+                                    }
+                                </select>
+                            </div>
+                            <div className='chrProp text-input'>
+                                <h6>Weapon</h6>
+                                <select name="weapon" id="weapon" onChange={(e) => setWeapon(e.target.value)}>
+                                <option disabled selected>Please select a weapon</option>
+                                {
+                                    (weapons) ?
+                                    weapons.equipment.map((weapons,id) => {
+                                        return (
+                                            <option key={id} value={weapons.name}>{weapons.name}</option>
+                                        )
+                                    }) : null
+                                }
+                            </select>
+                            </div>
+                            <div className='chrProp text-input'>
+                                <h6>Tool</h6>
+                                <select name="tool" id="tool" onChange={(e) => setTool(e.target.value)}>
+                                    <option disabled selected>Please select a tool</option>
+                                    {
+                                        (tools) ?
+                                        tools.equipment.map((tools,id) => {
+                                            return (
+                                                <option key={id} value={tools.name}>{tools.name}</option>
+                                            )
+                                        }) : null
+                                    }
+                                </select>
+                            </div>
+                        </div>
 
-                {/* //! Background Tool Dropdown */}
-                <Label htmlFor="backgroundTool">Background Tool: </Label>
-                <select name="backgroundTool" id="backgroundTool" onChange={(e) => setBackgroundTool(e.target.value)}>
-                    <option disabled selected>Please select a background tool</option>
-                    <option value="Artisan's Tools">Artisan's Tools</option>
-                    <option value="Disguise Kit">Disguise Kit</option>
-                    <option value="Forgery Kit">Forgery Kit</option>
-                    <option value="Gaming Set">Gaming Set</option>
-                    <option value="Herbalism Kit">Herbalism Kit</option>
-                    <option value="Musical Instrument">Musical Instrument</option>
-                    <option value="Navigator's Tools">Navigator's Tools</option>
-                    <option value="Theive's Tools">Theive's Tools</option>
-                    <option value="Vehicles - Land">Vehicles - Land</option>
-                    <option value="Vehicles - Water">Vehicles - Water</option>
-                </select>
+                        <div className="row6">
+                            <div className='chrProp text-input'>
+                                <h6>Gender</h6>
+                                <select name="gender" id="gender" onChange={(e) => setGender(e.target.value)}>
+                                    <option disabled selected>Please select a gender</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Intersex">Intersex</option>
+                                    <option value="Male">Male</option>
+                                </select>
+                            </div>
+                            <div className='chrProp text-input'>
+                                <h6>Height</h6>
+                                <input type="number" name="height" id="height" defaultValue={170} onChange={(e) => setHeight(e.target.value)}/>
+                            </div>
+                            <div className='chrProp text-input'>
+                                <h6>Weight</h6>
+                                <input type="number" name="weight" id="weight" defaultValue={62} onChange={(e) => setWeight(e.target.value)}/>
+                            </div>
+                        </div>
 
-                {/*//! Race Language Dropdown*/}
-                <Label htmlFor="raceLanguage">Race Language: </Label>
-                <select name="raceLanguage" id="raceLanguage" onChange={(e) => setRaceLanguage(e.target.value)}>
-                    <option disabled selected>Please select a race language</option>
-                    {
-                        (raceLanguages) ?
-                        raceLanguages.map((raceLanguages,id) => {
-                            return (
-                                <option key={id} value={raceLanguages.name}>{raceLanguages.name}</option>
-                            )
-                        }) : null
-                    }
-                </select>
-
-                {/* //! Fighting Style Dropdown */}
-                <Label htmlFor="fightingStyle">Fighting Style: </Label>
-                <select name="fightingStyle" id="fightingStyle" onChange={(e) => setFightingStyle(e.target.value)}>
-                    <option disabled selected>Please select a fighting style</option>
-                    <option value="Archery">Archery</option>
-                    <option value="Blessed Warrior">Blessed Warrior</option>
-                    <option value="Blind Fighting">Blind Fighting</option>
-                    <option value="Defense">Defense</option>
-                    <option value="Druidic Warrior">Druidic Warrior</option>
-                    <option value="Dueling">Dueling</option>
-                    <option value="Great Weapon Fighting">Great Weapon Fighting</option>
-                    <option value="Interception">Interception</option>
-                    <option value="Protection">Protection</option>
-                    <option value="Superior Technique">Superior Technique</option>
-                    <option value="Thrown Weapon Fighting">Thrown Weapon Fighting</option>
-                    <option value="Two-Weapon Fighting">Two-Weapon Fighting</option>
-                    <option value="Unarmed Fighting">Unarmed Fighting</option>
-                </select>
-
-                {/* //! Background Speciality Entry */}
-                <Label htmlFor="backgroundSpeciality">Background Speciality: </Label>
-                <textarea type="text" name="backgroundSpeciality" id="backgroundSpeciality" placeholder="Enter Background Speciality" rows="3" cols="30" onChange={(e) => setBackgroundSpeciality(e.target.value)}/>
-
-                {/* //! Hit Points Input */}
-                <Label htmlFor="hitPoints">Hit Points: </Label>
-                <input type="number" name="hitPoints" id="hitPoints" defaultValue={10} onChange={(e) => setHitPoints(e.target.value)}/>
-
-                {/*//! Known Spell Dropdown*/}
-                <Label htmlFor="knownSpell">Known Spell: </Label>
-                <select name="knownSpell" id="knownSpell" onChange={(e) => setKnownSpell(e.target.value)}>
-                    <option disabled selected>Please select a known spell</option>
-                    {
-                        (spells) ?
-                        spells.results.map((spells,id) => {
-                            return (
-                                <option key={id} value={spells.name}>{spells.name}</option>
-                            )
-                        }) : null
-                    }
-                </select>
-
-                {/*//! Armor Dropdown*/}
-                <Label htmlFor="armor">Armor: </Label>
-                <select name="armor" id="armor" onChange={(e) => setArmor(e.target.value)}>
-                    <option disabled selected>Please select an armor</option>
-                    {
-                        (armors) ?
-                        armors.equipment.map((armors,id) => {
-                            return (
-                                <option key={id} value={armors.name}>{armors.name}</option>
-                            )
-                        }) : null
-                    }
-                </select>
-
-                {/*//! Weapon Dropdown*/}
-                <Label htmlFor="weapon">Weapon: </Label>
-                <select name="weapon" id="weapon" onChange={(e) => setWeapon(e.target.value)}>
-                    <option disabled selected>Please select a weapon</option>
-                    {
-                        (weapons) ?
-                        weapons.equipment.map((weapons,id) => {
-                            return (
-                                <option key={id} value={weapons.name}>{weapons.name}</option>
-                            )
-                        }) : null
-                    }
-                </select>
-
-                {/*//! Tool Dropdown*/}
-                <Label htmlFor="tool">Tool: </Label>
-                <select name="tool" id="tool" onChange={(e) => setTool(e.target.value)}>
-                    <option disabled selected>Please select a tool</option>
-                    {
-                        (tools) ?
-                        tools.equipment.map((tools,id) => {
-                            return (
-                                <option key={id} value={tools.name}>{tools.name}</option>
-                            )
-                        }) : null
-                    }
-                </select>
-
-                {/* //! Name Entry */}
-                <Label htmlFor="name">Name: </Label>
-                <input type="text" name="name" id="name" placeholder="Enter Character Name" onChange={(e) => setName(e.target.value)}/>
-
-                {/* //! Gender Dropdown */}
-                <Label htmlFor="gender">Gender: </Label>
-                <select name="gender" id="gender" onChange={(e) => setGender(e.target.value)}>
-                    <option disabled selected>Please select a gender</option>
-                    <option value="Female">Female</option>
-                    <option value="Intersex">Intersex</option>
-                    <option value="Male">Male</option>
-                </select>
-
-                {/* //! Height Input */}
-                <Label htmlFor="height">Height(cm): </Label>
-                <input type="number" name="height" id="height" defaultValue={170} onChange={(e) => setHeight(e.target.value)}/>
-
-                {/* //! Weight Input */}
-                <Label htmlFor="weight">Weight(kg): </Label>
-                <input type="number" name="weight" id="weight" defaultValue={62} onChange={(e) => setWeight(e.target.value)}/>
-
-                {/* //! Character Backstory Entry */}
-                <Label htmlFor="characterBackstory">Character Backstory: </Label>
-                <textarea type="text" name="characterBackstory" id="characterBackstory" placeholder="Enter Character Backstory" rows="3" cols="30" onChange={(e) => setCharacterBackstory(e.target.value)}/>
-
-                {/* <p>You selected race: {race}</p> //! just to visually show state in the dom
-                <p>You selected class: {chrClass}</p>
-                <p>You selected background: {background}</p>
-                <p>You selected level: {level}</p>
-                <p>You selected strength: {strength}</p>
-                <p>You selected dexterity: {dexterity}</p>
-                <p>You selected constitution: {constitution}</p>
-                <p>You selected intelligence: {intelligence}</p>
-                <p>You selected wisdom: {wisdom}</p>
-                <p>You selected charisma: {charisma}</p>
-                <p>You selected class skill: {classSkill}</p>
-                <p>You selected background tool: {backgroundTool}</p>
-                <p>You selected race language: {raceLanguage}</p>
-                <p>You selected fighting style: {fightingStyle}</p>
-                <p>You selected background speciality: {backgroundSpeciality}</p>
-                <p>You selected hit points: {hitPoints}</p>
-                <p>You selected known spell: {knownSpell}</p>
-                <p>You selected armor: {armor}</p>
-                <p>You selected weapon: {weapon}</p>
-                <p>You selected tool: {tool}</p>
-                <p>You selected name: {name}</p>
-                <p>You selected gender: {gender}</p>
-                <p>You selected height: {height}</p>
-                <p>You selected weight: {weight}</p>
-                <p>You selected characterBackstory: {characterBackstory}</p> */}
-
-                <button className="submit">Create Character</button>
-                {/* {props.token} */}
+                        <div className="row7">
+                            <div className='chrProp text-input'>
+                                <h6>Character Backstory</h6>
+                                <textarea type="text" name="characterBackstory" id="characterBackstory" placeholder="Enter Character Backstory" rows="3" cols="30" onChange={(e) => setCharacterBackstory(e.target.value)}/>
+                            </div>
+                        </div>
+                    </div>
+                </ModalBody>
+                <ModalFooter>
+                    <Button className="submit">Create Character</Button>
+                    <Button type="button" onClick={() => props.createOff()}>Exit</Button>
+                </ModalFooter>
             </form>
-        </div>
+        </Modal>
     )
 }
 
 export default CharacterCreate;
+
+                        // <br />
+                        
+                        {/* //! Race Dropdown */}
+                        {/* <label htmlFor="race">Race:</label>
+
+                        <select name="race" id="race" onChange={(e) => setRace(e.target.value)}>
+                            <option >Please select a race</option>
+                            {
+                                (races) ?
+                                races.results.map((races,id) => {
+                                    return (
+                                        <option key={id} value={races.name}>{races.name}</option>
+                                    )
+                                }) : null
+                            }
+                        </select> */}
+                        
+                        {/*//! Class Dropdown*/}
+                        {/* <Label htmlFor="chrClass">Class: </Label>
+                        <select required name="chrClass" id="chrClass" onChange={(e) => setChrClass(e.target.value)}>
+                            <option disabled selected defaultValue={null}>Please select a class</option>
+                            {
+                                (chrClasses) ?
+                                chrClasses.results.map((chrClasses,id) => {
+                                    return (
+                                        <option key={id} value={chrClasses.name}>{chrClasses.name}</option>
+                                    )
+                                }) : null
+                            }
+                        </select> */}
+
+                        {/*//! Backgrounds Dropdown*/}
+                        {/* <Label htmlFor="background">Background: </Label>
+                        <select name="background" id="background" onChange={(e) => setBackground(e.target.value)}>
+                            <option disabled selected>Please select a background</option>
+                            <option value="Acolyte">Acolyte</option>
+                            <option value="Criminal">Criminal</option>
+                            <option value="Folk Hero">Folk Hero</option>
+                            <option value="Noble">Noble</option>
+                            <option value="Sage">Sage</option>
+                            <option value="Soldier">Soldier</option>
+                        </select> */}
+
+                        {/* //! Level Input */}
+                        {/* <Label htmlFor="level">Level: </Label>
+                        <input type="number" name="level" id="level" defaultValue={1} min={1} max={20} onChange={(e) => setLevel(e.target.value)}/> */}
+
+                        {/* //! Ability Score Inputs */}
+                        {/* <Label htmlFor="strength">Strength: </Label>
+                        <input type="number" name="strength" id="strength" defaultValue={10} min={3} max={15} onChange={(e) => setStrength(e.target.value)} />
+                        <Label htmlFor="dexterity">Dexterity: </Label>
+                        <input type="number" name="dexterity" id="dexterity" defaultValue={10} min={3} max={15} onChange={(e) => setDexterity(e.target.value)}/>
+                        <Label htmlFor="constitution">Constitution: </Label>
+                        <input type="number" name="constitution" id="constitution" defaultValue={10} min={3} max={15} onChange={(e) => setConstitution(e.target.value)}/>
+                        <Label htmlFor="intelligence">Intelligence: </Label>
+                        <input type="number" name="intelligence" id="intelligence" defaultValue={10} min={3} max={15} onChange={(e) => setIntelligence(e.target.value)}/>
+                        <Label htmlFor="wisdom">Wisdom: </Label>
+                        <input type="number" name="wisdom" id="wisdom" defaultValue={10} min={3} max={15} onChange={(e) => setWisdom(e.target.value)}/>
+                        <Label htmlFor="charisma">Charisma: </Label>
+                        <input type="number" name="charisma" id="charisma" defaultValue={10} min={3} max={15} onChange={(e) => setCharisma(e.target.value)}/> */}
+                        {/* <p>Total Points: {totalPoints}</p> */}
+                        {/* {
+                            (score >= 0) ?
+                            <p>you have {score} points remaining</p> :
+                            <p style={{"color":"red", "font-weight": "bold"}}>you have {score} points remaining</p>
+                        } */}
+                        
+
+                        {/* //! Class Skill Dropdown */}
+                        {/* <Label htmlFor="classSkill">Class Skill: </Label>
+                        <select name="classSkill" id="classSkill" onChange={(e) => setClassSkill(e.target.value)}>
+                            <option disabled selected>Please select a class skill</option>
+                            <option value="Arcana">Arcana</option>
+                            <option value="Athletics">Athletics</option>
+                            <option value="Bluff">Bluff</option>
+                            <option value="Diplomacy">Diplomacy</option>
+                            <option value="Dungeoneering">Dungeoneering</option>
+                            <option value="Endurance">Endurance</option>
+                            <option value="Heal">Heal</option>
+                            <option value="History">History</option>
+                            <option value="Insight">Insight</option>
+                            <option value="Intimidate">Intimidate</option>
+                            <option value="Nature">Nature</option>
+                            <option value="Perception">Perception</option>
+                            <option value="Religion">Religion</option>
+                            <option value="Stealth">Stealth</option>
+                            <option value="Streetwise">Streetwise</option>
+                            <option value="Thievery">Thievery</option>
+                        </select> */}
+
+                        {/* //! Background Tool Dropdown */}
+                        {/* <Label htmlFor="backgroundTool">Background Tool: </Label>
+                        <select name="backgroundTool" id="backgroundTool" onChange={(e) => setBackgroundTool(e.target.value)}>
+                            <option disabled selected>Please select a background tool</option>
+                            <option value="Artisan's Tools">Artisan's Tools</option>
+                            <option value="Disguise Kit">Disguise Kit</option>
+                            <option value="Forgery Kit">Forgery Kit</option>
+                            <option value="Gaming Set">Gaming Set</option>
+                            <option value="Herbalism Kit">Herbalism Kit</option>
+                            <option value="Musical Instrument">Musical Instrument</option>
+                            <option value="Navigator's Tools">Navigator's Tools</option>
+                            <option value="Theive's Tools">Theive's Tools</option>
+                            <option value="Vehicles - Land">Vehicles - Land</option>
+                            <option value="Vehicles - Water">Vehicles - Water</option>
+                        </select> */}
+
+                        {/*//! Race Language Dropdown*/}
+                        {/* <Label htmlFor="raceLanguage">Race Language: </Label>
+                        <select name="raceLanguage" id="raceLanguage" onChange={(e) => setRaceLanguage(e.target.value)}>
+                            <option disabled selected>Please select a race language</option>
+                            {
+                                (raceLanguages) ?
+                                raceLanguages.map((raceLanguages,id) => {
+                                    return (
+                                        <option key={id} value={raceLanguages.name}>{raceLanguages.name}</option>
+                                    )
+                                }) : null
+                            }
+                        </select> */}
+
+                        {/* //! Fighting Style Dropdown */}
+                        {/* <Label htmlFor="fightingStyle">Fighting Style: </Label>
+                        <select name="fightingStyle" id="fightingStyle" onChange={(e) => setFightingStyle(e.target.value)}>
+                            <option disabled selected>Please select a fighting style</option>
+                            <option value="Archery">Archery</option>
+                            <option value="Blessed Warrior">Blessed Warrior</option>
+                            <option value="Blind Fighting">Blind Fighting</option>
+                            <option value="Defense">Defense</option>
+                            <option value="Druidic Warrior">Druidic Warrior</option>
+                            <option value="Dueling">Dueling</option>
+                            <option value="Great Weapon Fighting">Great Weapon Fighting</option>
+                            <option value="Interception">Interception</option>
+                            <option value="Protection">Protection</option>
+                            <option value="Superior Technique">Superior Technique</option>
+                            <option value="Thrown Weapon Fighting">Thrown Weapon Fighting</option>
+                            <option value="Two-Weapon Fighting">Two-Weapon Fighting</option>
+                            <option value="Unarmed Fighting">Unarmed Fighting</option>
+                        </select> */}
+
+                        {/* //! Background Speciality Entry */}
+                        {/* <Label htmlFor="backgroundSpeciality">Background Speciality: </Label>
+                        <textarea type="text" name="backgroundSpeciality" id="backgroundSpeciality" placeholder="Enter Background Speciality" rows="3" cols="30" onChange={(e) => setBackgroundSpeciality(e.target.value)}/> */}
+
+                        {/* //! Hit Points Input */}
+                        {/* <Label htmlFor="hitPoints">Hit Points: </Label>
+                        <input type="number" name="hitPoints" id="hitPoints" defaultValue={10} onChange={(e) => setHitPoints(e.target.value)}/> */}
+
+                        {/*//! Known Spell Dropdown*/}
+                        {/* <Label htmlFor="knownSpell">Known Spell: </Label>
+                        <select name="knownSpell" id="knownSpell" onChange={(e) => setKnownSpell(e.target.value)}>
+                            <option disabled selected>Please select a known spell</option>
+                            {
+                                (spells) ?
+                                spells.results.map((spells,id) => {
+                                    return (
+                                        <option key={id} value={spells.name}>{spells.name}</option>
+                                    )
+                                }) : null
+                            }
+                        </select> */}
+
+                        {/*//! Armor Dropdown*/}
+                        {/* <Label htmlFor="armor">Armor: </Label>
+                        <select name="armor" id="armor" onChange={(e) => setArmor(e.target.value)}>
+                            <option disabled selected>Please select an armor</option>
+                            {
+                                (armors) ?
+                                armors.equipment.map((armors,id) => {
+                                    return (
+                                        <option key={id} value={armors.name}>{armors.name}</option>
+                                    )
+                                }) : null
+                            }
+                        </select> */}
+
+                        {/*//! Weapon Dropdown*/}
+                        {/* <Label htmlFor="weapon">Weapon: </Label>
+                        <select name="weapon" id="weapon" onChange={(e) => setWeapon(e.target.value)}>
+                            <option disabled selected>Please select a weapon</option>
+                            {
+                                (weapons) ?
+                                weapons.equipment.map((weapons,id) => {
+                                    return (
+                                        <option key={id} value={weapons.name}>{weapons.name}</option>
+                                    )
+                                }) : null
+                            }
+                        </select> */}
+
+                        {/*//! Tool Dropdown*/}
+                        {/* <Label htmlFor="tool">Tool: </Label>
+                        <select name="tool" id="tool" onChange={(e) => setTool(e.target.value)}>
+                            <option disabled selected>Please select a tool</option>
+                            {
+                                (tools) ?
+                                tools.equipment.map((tools,id) => {
+                                    return (
+                                        <option key={id} value={tools.name}>{tools.name}</option>
+                                    )
+                                }) : null
+                            }
+                        </select> */}
+
+                        {/* //! Name Entry */}
+                        {/* <Label htmlFor="name">Name: </Label>
+                        <input type="text" name="name" id="name" placeholder="Enter Character Name" onChange={(e) => setName(e.target.value)}/> */}
+
+                        {/* //! Gender Dropdown */}
+                        {/* <Label htmlFor="gender">Gender: </Label>
+                        <select name="gender" id="gender" onChange={(e) => setGender(e.target.value)}>
+                            <option disabled selected>Please select a gender</option>
+                            <option value="Female">Female</option>
+                            <option value="Intersex">Intersex</option>
+                            <option value="Male">Male</option>
+                        </select> */}
+
+                        {/* //! Height Input */}
+                        {/* <Label htmlFor="height">Height(cm): </Label>
+                        <input type="number" name="height" id="height" defaultValue={170} onChange={(e) => setHeight(e.target.value)}/> */}
+
+                        {/* //! Weight Input */}
+                        {/* <Label htmlFor="weight">Weight(kg): </Label>
+                        <input type="number" name="weight" id="weight" defaultValue={62} onChange={(e) => setWeight(e.target.value)}/> */}
+
+                        {/* //! Character Backstory Entry */}
+                        {/* <Label htmlFor="characterBackstory">Character Backstory: </Label>
+                        <textarea type="text" name="characterBackstory" id="characterBackstory" placeholder="Enter Character Backstory" rows="3" cols="30" onChange={(e) => setCharacterBackstory(e.target.value)}/> */}
+

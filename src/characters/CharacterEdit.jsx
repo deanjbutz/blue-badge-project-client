@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
-import { Label } from 'reactstrap';
+import { Label, Modal } from 'reactstrap';
+import './characterEdit.css'
 
 const CharacterEdit = (props) => {
     const baseURL = "https://www.dnd5eapi.co/api/"
@@ -186,7 +187,7 @@ const CharacterEdit = (props) => {
     }, [editStrength, editDexterity, editConstitution, editIntelligence, editWisdom, editCharisma])
 
     return (
-        <div>
+        <Modal isOpen={true}  style={{maxWidth: '90vw', paddingTop: '3%'}}>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <h3>CharacterEdit</h3>
                 
@@ -444,7 +445,7 @@ const CharacterEdit = (props) => {
                 <button className="submit">Submit Edit</button>
                 {/* {props.token} */}
             </form>
-        </div>
+        </Modal>
     )
 }
 

@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Table } from 'reactstrap';
+import { Table, Button } from 'reactstrap';
 
 import CharacterView from './CharacterView'
 import CharacterEdit from './CharacterEdit';

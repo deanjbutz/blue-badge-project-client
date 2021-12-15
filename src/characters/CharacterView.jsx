@@ -1,14 +1,9 @@
 import React, {useState} from 'react';
 import { Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './characterView.css'
 
 const CharacterView = (props) => {
-
-    // (props.token) ?
-    // const payload = JSON.parse(window.atob(props.token.split('.')[1])) :
-    // null
-
-    // const payload = JSON.parse(window.atob(props.token.split('.')[1]))
 
     const deleteCharacter = (character) => {
 
@@ -38,73 +33,129 @@ const CharacterView = (props) => {
 
     return (
         // <div>
-        <Modal isOpen={true} size="lg" style={{maxWidth: '90%', paddingTop: '5%'}}>
-            <ModalHeader toggle={function noRefCheck(){}}>
-                CharacterView
+        <Modal isOpen={true}  style={{maxWidth: '90vw', paddingTop: '3%'}}>
+            <ModalHeader className='modal-header d-block' >
+                {props.character.name}
             </ModalHeader>
-
             <ModalBody>
-                <Table striped>
-                    <thead>
-                        <tr>
-                            <td>Race</td>
-                            <td>Class</td>
-                            <td>Background</td>
-                            <td>Level</td>
-                            <td>Strength</td>
-                            <td>Dexterity</td>
-                            <td>Constitution</td>
-                            <td>Intelligence</td>
-                            <td>Wisdom</td>
-                            <td>Charisma</td>
-                            <td>ClassSkill</td>
-                            <td>BackgroundTool</td>
-                            <td>RaceLanguage</td>
-                            <td>FightingStyle</td>
-                            <td>BackgroundSpeciality</td>
-                            <td>HitPoints</td>
-                            <td>KnownSpell</td>
-                            <td>Armor</td>
-                            <td>Weapon</td>
-                            <td>Tool</td>
-                            <td>Gender</td>
-                            <td>Height</td>
-                            <td>Weight</td>
-                            <td>Character Backstory</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{props.character.race}</td>
-                            <td>{props.character.chrClass}</td>
-                            <td>{props.character.background}</td>
-                            <td>{props.character.level}</td>
-                            <td>{props.character.strength}</td>
-                            <td>{props.character.dexterity}</td>
-                            <td>{props.character.constitution}</td>
-                            <td>{props.character.intelligence}</td>
-                            <td>{props.character.wisdom}</td>
-                            <td>{props.character.charisma}</td>
-                            <td>{props.character.classSkill}</td>
-                            <td>{props.character.backgroundTool}</td>
-                            <td>{props.character.raceLanguage}</td>
-                            <td>{props.character.fightingStyle}</td>
-                            <td>{props.character.backgroundSpeciality}</td>
-                            <td>{props.character.hitPoints}</td>
-                            <td>{props.character.knownSpell}</td>
-                            <td>{props.character.armor}</td>
-                            <td>{props.character.weapon}</td>
-                            <td>{props.character.tool}</td>
-                            <td>{props.character.gender}</td>
-                            <td>{props.character.height}</td>
-                            <td>{props.character.weight}</td>
-                            <td>{props.character.characterBackstory}</td>
-                            <td>{props.character.owner_id}</td>
-                        </tr>
-                    </tbody>
-                </Table>
+                <div className='selections'>
+                    <div className="row1">
+                        <div className='chrProp text-input'>
+                            <h6>Race</h6>
+                            <p>{props.character.race}</p>
+                        </div>
+                        <div className='chrProp text-input'>
+                            <h6>Class</h6>
+                            <p>{props.character.chrClass}</p>
+                        </div>
+                        <div className='chrProp text-input'>
+                            <h6>Background</h6>
+                            <p>{props.character.background}</p>
+                        </div>
+                        <div className='chrProp text-input'>
+                            <h6>Level</h6>
+                            <p>{props.character.level}</p>
+                        </div>
+                    </div>
+                    <div className='row2'>
+                        <div>
+                            <h5>Ability Scores</h5>
+                                    <div className='ability-scores'>
+                                        <div className='chrProp text-input'>
+                                            <h6>Strength</h6>
+                                            <p>{props.character.strength}</p>
+                                        </div>
+                                        <div className='chrProp text-input'>
+                                            <h6>Dexterirty</h6>
+                                            <p>{props.character.dexterity}</p>
+                                        </div>
+                                        <div className='chrProp text-input'>
+                                            <h6>Constitution</h6>
+                                            <p>{props.character.constitution}</p>
+                                        </div>
+                                        <div className='chrProp text-input'>
+                                            <h6>Intelligence</h6>
+                                            <p>{props.character.intelligence}</p>
+                                        </div>
+                                        <div className='chrProp text-input'>
+                                            <h6>Wisdom</h6>
+                                            <p>{props.character.wisdom}</p>
+                                        </div>
+                                        <div className='chrProp text-input'>
+                                            <h6>Charisma</h6>
+                                            <p>{props.character.charisma}</p>
+                                        </div>
+                                    </div>
+                        </div>
+                    </div>
+                    <div className="row3">
+                        <div className='chrProp text-input'>
+                            <h6>Class Skill</h6>
+                            <p>{props.character.classSkill}</p>
+                        </div>
+                        <div className='chrProp text-input'>
+                            <h6>Background Tool</h6>
+                            <p>{props.character.backgroudTool}</p>
+                        </div>
+                        <div className='chrProp text-input'>
+                            <h6>Race Language</h6>
+                            <p>{props.character.raceLanguage}</p>
+                        </div>
+                        <div className='chrProp text-input'>
+                            <h6>Fighting Style</h6>
+                            <p>{props.character.fightingStyle}</p>
+                        </div>
+                    </div>
+                    <div className="row4">
+                        <div className='chrProp text-input'>
+                            <h6>Background Speciality</h6>
+                            <p>{props.character.backgroundSpeciality}</p>
+                        </div>
+                    </div>
+                    <div className="row5">
+                        <div className='chrProp text-input'>
+                            <h6>Hit Points</h6>
+                            <p>{props.character.hitPoints}</p>
+                        </div>
+                        <div className='chrProp text-input'>
+                            <h6>Known Spell</h6>
+                            <p>{props.character.knownSpell}</p>
+                        </div>
+                        <div className='chrProp text-input'>
+                            <h6>Armor</h6>
+                            <p>{props.character.armor}</p>
+                        </div>
+                        <div className='chrProp text-input'>
+                            <h6>Weapon</h6>
+                            <p>{props.character.weapon}</p>
+                        </div>
+                        <div className='chrProp text-input'>
+                            <h6>Tool</h6>
+                            <p>{props.character.tool}</p>
+                        </div>
+                    </div>
+                    <div className="row6">
+                        <div className='chrProp text-input'>
+                            <h6>Gender</h6>
+                            <p>{props.character.gender}</p>
+                        </div>
+                        <div className='chrProp text-input'>
+                            <h6>Height</h6>
+                            <p>{props.character.height}</p>
+                        </div>
+                        <div className='chrProp text-input'>
+                            <h6>Weight</h6>
+                            <p>{props.character.weight}</p>
+                        </div>
+                    </div>
+                    <div className="row7">
+                        <div className='chrProp text-input'>
+                            <h6>Character Backstory</h6>
+                            <p>{props.character.characterBackstory}</p>
+                        </div>
+                    </div>
+                </div>
             </ModalBody>
-
             <ModalFooter>
             {
                                 (props.token.includes('Bearer')) ?
@@ -123,36 +174,6 @@ const CharacterView = (props) => {
                 <Button onClick={() => props.toggleViewCharacter()}>Close</Button>            
             </ModalFooter>
         </Modal>
-        // </div>
-
-
-
-  
-//   <Modal
-//   isOpen={true}
-//   >
-//     <ModalHeader toggle={function noRefCheck(){}}>
-//       Modal title
-//     </ModalHeader>
-//     <ModalBody>
-//       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-//     </ModalBody>
-//     <ModalFooter>
-//       <Button
-//         color="primary"
-//         onClick={function noRefCheck(){}}
-//       >
-//         Do Something
-//       </Button>
-//       {' '}
-//       <Button onClick={function noRefCheck(){}}>
-//         Cancel
-//       </Button>
-//     </ModalFooter>
-//   </Modal>
-
-
-
     )
 }
 

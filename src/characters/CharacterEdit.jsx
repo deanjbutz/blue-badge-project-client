@@ -6,19 +6,18 @@ const CharacterEdit = (props) => {
     //! races
     const racesEndpoint = `${baseURL}races/`
     const [races, setRaces] = useState('')
-    const [race, setRace] = useState('')
+    const [editRace, setEditRace] = useState(props.character.race)
     const fetchRaces = () => {
         fetch(racesEndpoint)
         .then(res => res.json())
         .then(data => setRaces(data))
         .then(console.log(races))
-        // .then(fetchRaceLanguages())
         .catch(err => console.log(err))
     }
     //! classes
     const chrClassesEndpoint = `${baseURL}classes/`
     const [chrClasses, setChrClasses] = useState('')
-    const [chrClass, setChrClass] = useState('')
+    const [editChrClass, setEditChrClass] = useState(props.character.chrClass)
     const fetchChrClasses = () => {
         fetch(chrClassesEndpoint)
         .then(res => res.json())
@@ -27,31 +26,31 @@ const CharacterEdit = (props) => {
         .catch(err => console.log(err))
     }
     //! backgrounds
-    const [background, setBackground] = useState('')
+    const [editBackground, setEditBackground] = useState(props.character.background)
     //! levels
-    const [level, setLevel] = useState(1)
+    const [editLevel, setEditLevel] = useState(props.character.level)
     //! ability scores
-    const [strength, setStrength] = useState(10)
-    const [dexterity, setDexterity] = useState(10)
-    const [constitution, setConstitution] = useState(10)
-    const [intelligence, setIntelligence] = useState(10)
-    const [wisdom, setWisdom] = useState(10)
-    const [charisma, setCharisma] = useState(10)
+    const [editStrength, setEditStrength] = useState(props.character.strength)
+    const [editDexterity, setEditDexterity] = useState(props.character.dexterity)
+    const [editConstitution, setEditConstitution] = useState(props.character.constitution)
+    const [editIntelligence, setEditIntelligence] = useState(props.character.intelligence)
+    const [editWisdom, setEditWisdom] = useState(props.character.wisdom)
+    const [editCharisma, setEditCharisma] = useState(props.character.charisma)
     const totalScore = 75
     const [score, setScore] = useState(60)
     const setAbilityScoreTotal = () => {
-        const totalPoints = (parseFloat(strength) + parseFloat(dexterity) + parseFloat(constitution) + parseFloat(intelligence) + parseFloat(wisdom) + parseFloat(charisma));
+        const totalPoints = (parseFloat(editStrength) + parseFloat(editDexterity) + parseFloat(editConstitution) + parseFloat(editIntelligence) + parseFloat(editWisdom) + parseFloat(editCharisma));
         const pointsRemaining = (totalScore - totalPoints);
         setScore(pointsRemaining)
     }
     //! class skill
-    const [classSkill, setClassSkill] = useState('')
+    const [editClassSkill, setEditClassSkill] = useState(props.character.classSkill)
     //! background tool
-    const [backgroundTool, setBackgroundTool] = useState('')
+    const [editBackgroundTool, setEditBackgroundTool] = useState(props.character.backgroundTool)
     //! race language
-    const raceLanguagesEndpoint = `${racesEndpoint}${race.toLowerCase()}`
+    const raceLanguagesEndpoint = `${racesEndpoint}${editRace.toLowerCase()}`
     const [raceLanguages, setRaceLanguages] = useState('')
-    const [raceLanguage, setRaceLanguage] = useState('')
+    const [editRaceLanguage, setEditRaceLanguage] = useState(props.character.raceLanguage)
     const fetchRaceLanguages = () => {
         fetch(raceLanguagesEndpoint)
         .then(res => res.json())
@@ -61,15 +60,15 @@ const CharacterEdit = (props) => {
         .catch(err => console.log(err))
     }
     //! fighting style
-    const [fightingStyle, setFightingStyle] = useState('')
-    //! background specialty
-    const [backgroundSpecialty, setBackgroundSpecialty] = useState('')
+    const [editFightingStyle, setEditFightingStyle] = useState(props.character.fightingStyle)
+    //! background speciality
+    const [editBackgroundSpeciality, setEditBackgroundSpeciality] = useState(props.character.backgroundSpeciality)
     //! hit points
-    const [hitPoints, setHitPoints] = useState(10)
+    const [editHitPoints, setEditHitPoints] = useState(props.character.hitPoints)
     //! known spell
     const spellsEndpoint = `${baseURL}spells/`
     const [spells, setSpells] = useState('')
-    const [knownSpell, setKnownSpell] = useState('')
+    const [editKnownSpell, setEditKnownSpell] = useState(props.character.knownSpell)
     const fetchSpells = () => {
         fetch(spellsEndpoint)
         .then(res => res.json())
@@ -80,7 +79,7 @@ const CharacterEdit = (props) => {
     //! armor
     const armorsEndpoint = `${baseURL}equipment-categories/armor`
     const [armors, setArmors] = useState('')
-    const [armor, setArmor] = useState('')
+    const [editArmor, setEditArmor] = useState(props.character.armor)
     const fetchArmors = () => {
         fetch(armorsEndpoint)
         .then(res => res.json())
@@ -91,7 +90,7 @@ const CharacterEdit = (props) => {
     //! weapon
     const weaponsEndpoint = `${baseURL}equipment-categories/weapon`
     const [weapons, setWeapons] = useState('')
-    const [weapon, setWeapon] = useState('')
+    const [editWeapon, setEditWeapon] = useState(props.character.weapon)
     const fetchWeapons = () => {
         fetch(weaponsEndpoint)
         .then(res => res.json())
@@ -102,7 +101,7 @@ const CharacterEdit = (props) => {
     //! tool
     const toolsEndpoint = `${baseURL}equipment-categories/tools`
     const [tools, setTools] = useState('')
-    const [tool, setTool] = useState('')
+    const [editTool, setEditTool] = useState(props.character.tool)
     const fetchTools = () => {
         fetch(toolsEndpoint)
         .then(res => res.json())
@@ -111,48 +110,51 @@ const CharacterEdit = (props) => {
         .catch(err => console.log(err))
     }
     //! name
-    const [name, setName] = useState('')
+    const [editName, setEditName] = useState(props.character.name)
     //! gender
-    const [gender, setGender] = useState('')
+    const [editGender, setEditGender] = useState(props.character.gender)
     //! height
-    const [height, setHeight] = useState(0)
+    const [editHeight, setEditHeight] = useState(props.character.height)
     //! weight
-    const [weight, setWeight] = useState(0)
+    const [editWeight, setEditWeight] = useState(props.character.weight)
     //! character backstory
-    const [characterBackstory, setCharacterBackstory] = useState('')
+    const [editCharacterBackstory, setEditCharacterBackstory] = useState(props.character.characterBackstory)
 
 
     const handleSubmit = (e) => {
+
+        const payload = JSON.parse(window.atob(props.token.split('.')[1]))
+
         e.preventDefault();
-        fetch(`http://localhost:3025/character/`, {
-            method: "POST",
+        fetch(`http://localhost:3025/character/${props.character.id}`, {
+            method: "PUT",
             body: JSON.stringify({ 
-                "race": race,
-                "chrClass": chrClass,
-                "background": background,
-                "level": level,
-                "strength": strength,
-                "dexterity": dexterity,
-                "constitution": constitution,
-                "intelligence": intelligence,
-                "wisdom": wisdom,
-                "charisma": charisma,
-                "classSkill": classSkill,
-                "backgroundTool": backgroundTool,
-                "raceLanguage": raceLanguage,
-                "fightingStyle": fightingStyle,
-                "backgroundSpeciality": backgroundSpecialty,
-                "hitPoints": hitPoints,
-                "knownSpell": knownSpell,
-                "armor": armor,
-                "weapon": weapon,
-                "tool": tool,
-                "name": name,
-                "gender": gender,
-                "height": height,
-                "weight": weight,
-                "characterBackstory": characterBackstory,
-                "owner_id": 1234
+                "race": editRace,
+                "chrClass": editChrClass,
+                "background": editBackground,
+                "level": editLevel,
+                "strength": editStrength,
+                "dexterity": editDexterity,
+                "constitution": editConstitution,
+                "intelligence": editIntelligence,
+                "wisdom": editWisdom,
+                "charisma": editCharisma,
+                "classSkill": editClassSkill,
+                "backgroundTool": editBackgroundTool,
+                "raceLanguage": editRaceLanguage,
+                "fightingStyle": editFightingStyle,
+                "backgroundSpeciality": editBackgroundSpeciality,
+                "hitPoints": editHitPoints,
+                "knownSpell": editKnownSpell,
+                "armor": editArmor,
+                "weapon": editWeapon,
+                "tool": editTool,
+                "name": editName,
+                "gender": editGender,
+                "height": editHeight,
+                "weight": editWeight,
+                "characterBackstory": editCharacterBackstory,
+                "owner_id": payload.id
             }),
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -160,7 +162,9 @@ const CharacterEdit = (props) => {
             })
         })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => alert(data.message))
+        .then(() => props.fetchCharacters())
+        .then(() => props.toggleViewEditCharacter()) //! not working
         .catch(err => console.log(err))
     }
 
@@ -175,11 +179,11 @@ const CharacterEdit = (props) => {
 
     useEffect(() => {
         fetchRaceLanguages()
-    }, [race])
+    }, [editRace])
 
     useEffect(() => {
         setAbilityScoreTotal()
-    }, [score, strength, dexterity, constitution, intelligence, wisdom, charisma])
+    }, [editStrength, editDexterity, editConstitution, editIntelligence, editWisdom, editCharisma])
 
     return (
         <div>
@@ -188,8 +192,8 @@ const CharacterEdit = (props) => {
                 
                 {/* //! Race Dropdown */}
                 <label htmlFor="race">Race:</label>
-                <select name="race" id="race" onChange={(e) => setRace(e.target.value)}>
-                    <option >Please select a race</option>
+                <select name="race" id="race" onChange={(e) => setEditRace(e.target.value)}>
+                    <option value={props.character.race}>{props.character.race}</option>
                     {
                         (races) ?
                         races.results.map((races,id) => {
@@ -202,8 +206,8 @@ const CharacterEdit = (props) => {
                 
                 {/*//! Class Dropdown*/}
                 <Label htmlFor="chrClass">Class: </Label>
-                <select name="chrClass" id="chrClass" onChange={(e) => setChrClass(e.target.value)}>
-                    <option disabled selected>Please select a class</option>
+                <select name="chrClass" id="chrClass" onChange={(e) => setEditChrClass(e.target.value)}>
+                    <option value={props.character.chrClass}>{props.character.chrClass}</option>
                     {
                         (chrClasses) ?
                         chrClasses.results.map((chrClasses,id) => {
@@ -216,8 +220,8 @@ const CharacterEdit = (props) => {
 
                 {/*//! Backgrounds Dropdown*/}
                 <Label htmlFor="background">Background: </Label>
-                <select name="background" id="background" onChange={(e) => setBackground(e.target.value)}>
-                    <option disabled selected>Please select a background</option>
+                <select name="background" id="background" onChange={(e) => setEditBackground(e.target.value)}>
+                    <option defaultValue={props.character.background}>{props.character.background}</option>
                     <option value="Acolyte">Acolyte</option>
                     <option value="Criminal">Criminal</option>
                     <option value="Folk Hero">Folk Hero</option>
@@ -228,21 +232,21 @@ const CharacterEdit = (props) => {
 
                 {/* //! Level Input */}
                 <Label htmlFor="level">Level: </Label>
-                <input type="number" name="level" id="level" defaultValue={1} min={1} max={20} onChange={(e) => setLevel(e.target.value)}/>
+                <input type="number" name="level" id="level" defaultValue={props.character.level} min={1} max={20} onChange={(e) => setEditLevel(e.target.value)}/>
 
                 {/* //! Ability Score Inputs */}
                 <Label htmlFor="strength">Strength: </Label>
-                <input type="number" name="strength" id="strength" defaultValue={10} min={3} max={15} onChange={(e) => setStrength(e.target.value)} />
+                <input type="number" name="strength" id="strength" defaultValue={props.character.strength} min={3} max={15} onChange={(e) => setEditStrength(e.target.value)} />
                 <Label htmlFor="dexterity">Dexterity: </Label>
-                <input type="number" name="dexterity" id="dexterity" defaultValue={10} min={3} max={15} onChange={(e) => setDexterity(e.target.value)}/>
+                <input type="number" name="dexterity" id="dexterity" defaultValue={props.character.dexterity} min={3} max={15} onChange={(e) => setEditDexterity(e.target.value)}/>
                 <Label htmlFor="constitution">Constitution: </Label>
-                <input type="number" name="constitution" id="constitution" defaultValue={10} min={3} max={15} onChange={(e) => setConstitution(e.target.value)}/>
+                <input type="number" name="constitution" id="constitution" defaultValue={props.character.constitution} min={3} max={15} onChange={(e) => setEditConstitution(e.target.value)}/>
                 <Label htmlFor="intelligence">Intelligence: </Label>
-                <input type="number" name="intelligence" id="intelligence" defaultValue={10} min={3} max={15} onChange={(e) => setIntelligence(e.target.value)}/>
+                <input type="number" name="intelligence" id="intelligence" defaultValue={props.character.intelligence} min={3} max={15} onChange={(e) => setEditIntelligence(e.target.value)}/>
                 <Label htmlFor="wisdom">Wisdom: </Label>
-                <input type="number" name="wisdom" id="wisdom" defaultValue={10} min={3} max={15} onChange={(e) => setWisdom(e.target.value)}/>
+                <input type="number" name="wisdom" id="wisdom" defaultValue={props.character.wisdom} min={3} max={15} onChange={(e) => setEditWisdom(e.target.value)}/>
                 <Label htmlFor="charisma">Charisma: </Label>
-                <input type="number" name="charisma" id="charisma" defaultValue={10} min={3} max={15} onChange={(e) => setCharisma(e.target.value)}/>
+                <input type="number" name="charisma" id="charisma" defaultValue={props.character.charisma} min={3} max={15} onChange={(e) => setEditCharisma(e.target.value)}/>
                 {/* <p>Total Points: {totalPoints}</p> */}
                 {
                     (score >= 0) ?
@@ -253,8 +257,8 @@ const CharacterEdit = (props) => {
 
                 {/* //! Class Skill Dropdown */}
                 <Label htmlFor="classSkill">Class Skill: </Label>
-                <select name="classSkill" id="classSkill" onChange={(e) => setClassSkill(e.target.value)}>
-                    <option disabled selected>Please select a class skill</option>
+                <select name="classSkill" id="classSkill" onChange={(e) => setEditClassSkill(e.target.value)}>
+                    <option defaultValue={props.character.classSkill}>{props.character.classSkill}</option>
                     <option value="Arcana">Arcana</option>
                     <option value="Athletics">Athletics</option>
                     <option value="Bluff">Bluff</option>
@@ -275,8 +279,8 @@ const CharacterEdit = (props) => {
 
                 {/* //! Background Tool Dropdown */}
                 <Label htmlFor="backgroundTool">Background Tool: </Label>
-                <select name="backgroundTool" id="backgroundTool" onChange={(e) => setBackgroundTool(e.target.value)}>
-                    <option disabled selected>Please select a background tool</option>
+                <select name="backgroundTool" id="backgroundTool" onChange={(e) => setEditBackgroundTool(e.target.value)}>
+                    <option defaultValue={props.character.backgroundTool}>{props.character.backgroundTool}</option>
                     <option value="Artisan's Tools">Artisan's Tools</option>
                     <option value="Disguise Kit">Disguise Kit</option>
                     <option value="Forgery Kit">Forgery Kit</option>
@@ -291,8 +295,8 @@ const CharacterEdit = (props) => {
 
                 {/*//! Race Language Dropdown*/}
                 <Label htmlFor="raceLanguage">Race Language: </Label>
-                <select name="raceLanguage" id="raceLanguage" onChange={(e) => setRaceLanguage(e.target.value)}>
-                    <option disabled selected>Please select a race language</option>
+                <select name="raceLanguage" id="raceLanguage" onChange={(e) => setEditRaceLanguage(e.target.value)}>
+                    <option defaultValue={props.character.raceLanguage}>{props.character.raceLanguage}</option>
                     {
                         (raceLanguages) ?
                         raceLanguages.map((raceLanguages,id) => {
@@ -305,8 +309,8 @@ const CharacterEdit = (props) => {
 
                 {/* //! Fighting Style Dropdown */}
                 <Label htmlFor="fightingStyle">Fighting Style: </Label>
-                <select name="fightingStyle" id="fightingStyle" onChange={(e) => setFightingStyle(e.target.value)}>
-                    <option disabled selected>Please select a fighting style</option>
+                <select name="fightingStyle" id="fightingStyle" onChange={(e) => setEditFightingStyle(e.target.value)}>
+                    <option defaultValue={props.character.fightingStyle}>{props.character.fightingStyle}</option>
                     <option value="Archery">Archery</option>
                     <option value="Blessed Warrior">Blessed Warrior</option>
                     <option value="Blind Fighting">Blind Fighting</option>
@@ -322,18 +326,18 @@ const CharacterEdit = (props) => {
                     <option value="Unarmed Fighting">Unarmed Fighting</option>
                 </select>
 
-                {/* //! Background Specialty Entry */}
-                <Label htmlFor="backgroundSpecialty">Background Specialty: </Label>
-                <textarea type="text" name="backgroundSpecialty" id="backgroundSpecialty" placeholder="Enter Background Specialty" rows="3" cols="30" onChange={(e) => setBackgroundSpecialty(e.target.value)}/>
+                {/* //! Background Speciality Entry */}
+                <Label htmlFor="backgroundSpeciality">Background Speciality: </Label>
+                <textarea type="text" name="backgroundSpeciality" id="backgroundSpeciality" defaultValue={props.character.backgroundSpeciality} rows="3" cols="30" onChange={(e) => setEditBackgroundSpeciality(e.target.value)}/>
 
                 {/* //! Hit Points Input */}
                 <Label htmlFor="hitPoints">Hit Points: </Label>
-                <input type="number" name="hitPoints" id="hitPoints" defaultValue={10} onChange={(e) => setHitPoints(e.target.value)}/>
+                <input type="number" name="hitPoints" id="hitPoints" defaultValue={props.character.hitPoints} onChange={(e) => setEditHitPoints(e.target.value)}/>
 
                 {/*//! Known Spell Dropdown*/}
                 <Label htmlFor="knownSpell">Known Spell: </Label>
-                <select name="knownSpell" id="knownSpell" onChange={(e) => setKnownSpell(e.target.value)}>
-                    <option disabled selected>Please select a known spell</option>
+                <select name="knownSpell" id="knownSpell" onChange={(e) => setEditKnownSpell(e.target.value)}>
+                    <option defaultValue={props.character.knownSpell}>{props.character.knownSpell}</option>
                     {
                         (spells) ?
                         spells.results.map((spells,id) => {
@@ -346,8 +350,8 @@ const CharacterEdit = (props) => {
 
                 {/*//! Armor Dropdown*/}
                 <Label htmlFor="armor">Armor: </Label>
-                <select name="armor" id="armor" onChange={(e) => setArmor(e.target.value)}>
-                    <option disabled selected>Please select an armor</option>
+                <select name="armor" id="armor" onChange={(e) => setEditArmor(e.target.value)}>
+                    <option defaultValue={props.character.armor}>{props.character.armor}</option>
                     {
                         (armors) ?
                         armors.equipment.map((armors,id) => {
@@ -360,8 +364,8 @@ const CharacterEdit = (props) => {
 
                 {/*//! Weapon Dropdown*/}
                 <Label htmlFor="weapon">Weapon: </Label>
-                <select name="weapon" id="weapon" onChange={(e) => setWeapon(e.target.value)}>
-                    <option disabled selected>Please select a weapon</option>
+                <select name="weapon" id="weapon" onChange={(e) => setEditWeapon(e.target.value)}>
+                    <option defaultValue={props.character.weapon}>{props.character.weapon}</option>
                     {
                         (weapons) ?
                         weapons.equipment.map((weapons,id) => {
@@ -374,8 +378,8 @@ const CharacterEdit = (props) => {
 
                 {/*//! Tool Dropdown*/}
                 <Label htmlFor="tool">Tool: </Label>
-                <select name="tool" id="tool" onChange={(e) => setTool(e.target.value)}>
-                    <option disabled selected>Please select a tool</option>
+                <select name="tool" id="tool" onChange={(e) => setEditTool(e.target.value)}>
+                    <option defaultValue={props.character.tool}>{props.character.tool}</option>
                     {
                         (tools) ?
                         tools.equipment.map((tools,id) => {
@@ -388,12 +392,12 @@ const CharacterEdit = (props) => {
 
                 {/* //! Name Entry */}
                 <Label htmlFor="name">Name: </Label>
-                <input type="text" name="name" id="name" placeholder="Enter Character Name" onChange={(e) => setName(e.target.value)}/>
+                <input type="text" name="name" id="name" defaultValue={props.character.name} onChange={(e) => setEditName(e.target.value)}/>
 
                 {/* //! Gender Dropdown */}
                 <Label htmlFor="gender">Gender: </Label>
-                <select name="gender" id="gender" onChange={(e) => setGender(e.target.value)}>
-                    <option disabled selected>Please select a gender</option>
+                <select name="gender" id="gender" onChange={(e) => setEditGender(e.target.value)}>
+                    <option defaultValue={props.character.gender}>{props.character.gender}</option>
                     <option value="Female">Female</option>
                     <option value="Intersex">Intersex</option>
                     <option value="Male">Male</option>
@@ -401,15 +405,15 @@ const CharacterEdit = (props) => {
 
                 {/* //! Height Input */}
                 <Label htmlFor="height">Height(cm): </Label>
-                <input type="number" name="height" id="height" defaultValue={170} onChange={(e) => setHeight(e.target.value)}/>
+                <input type="number" name="height" id="height" defaultValue={props.character.height} onChange={(e) => setEditHeight(e.target.value)}/>
 
                 {/* //! Weight Input */}
                 <Label htmlFor="weight">Weight(kg): </Label>
-                <input type="number" name="weight" id="weight" defaultValue={62} onChange={(e) => setWeight(e.target.value)}/>
+                <input type="number" name="weight" id="weight" defaultValue={props.character.weight} onChange={(e) => setEditWeight(e.target.value)}/>
 
                 {/* //! Character Backstory Entry */}
                 <Label htmlFor="characterBackstory">Character Backstory: </Label>
-                <textarea type="text" name="characterBackstory" id="characterBackstory" placeholder="Enter Character Backstory" rows="3" cols="30" onChange={(e) => setCharacterBackstory(e.target.value)}/>
+                <textarea type="text" name="characterBackstory" id="characterBackstory" defaultValue={props.character.characterBackstory} rows="3" cols="30" onChange={(e) => setEditCharacterBackstory(e.target.value)}/>
 
                 {/* <p>You selected race: {race}</p> //! just to visually show state in the dom
                 <p>You selected class: {chrClass}</p>
@@ -425,7 +429,7 @@ const CharacterEdit = (props) => {
                 <p>You selected background tool: {backgroundTool}</p>
                 <p>You selected race language: {raceLanguage}</p>
                 <p>You selected fighting style: {fightingStyle}</p>
-                <p>You selected background specialty: {backgroundSpecialty}</p>
+                <p>You selected background speciality: {backgroundSpeciality}</p>
                 <p>You selected hit points: {hitPoints}</p>
                 <p>You selected known spell: {knownSpell}</p>
                 <p>You selected armor: {armor}</p>

@@ -62,8 +62,8 @@ const CharacterCreate = (props) => {
     }
     //! fighting style
     const [fightingStyle, setFightingStyle] = useState('')
-    //! background specialty
-    const [backgroundSpecialty, setBackgroundSpecialty] = useState('')
+    //! background speciality
+    const [backgroundSpeciality, setBackgroundSpeciality] = useState('')
     //! hit points
     const [hitPoints, setHitPoints] = useState(10)
     //! known spell
@@ -145,7 +145,7 @@ const CharacterCreate = (props) => {
                 "backgroundTool": backgroundTool,
                 "raceLanguage": raceLanguage,
                 "fightingStyle": fightingStyle,
-                "backgroundSpeciality": backgroundSpecialty,
+                "backgroundSpeciality": backgroundSpeciality,
                 "hitPoints": hitPoints,
                 "knownSpell": knownSpell,
                 "armor": armor,
@@ -165,7 +165,7 @@ const CharacterCreate = (props) => {
         })
         .then(res => res.json())
         .then(data => console.log(data))
-        .then(props.fetchCharacters())
+        .then(() => props.fetchCharacters())
         .catch(err => console.log(err))
     }
 
@@ -328,9 +328,9 @@ const CharacterCreate = (props) => {
                     <option value="Unarmed Fighting">Unarmed Fighting</option>
                 </select>
 
-                {/* //! Background Specialty Entry */}
-                <Label htmlFor="backgroundSpecialty">Background Specialty: </Label>
-                <textarea type="text" name="backgroundSpecialty" id="backgroundSpecialty" placeholder="Enter Background Specialty" rows="3" cols="30" onChange={(e) => setBackgroundSpecialty(e.target.value)}/>
+                {/* //! Background Speciality Entry */}
+                <Label htmlFor="backgroundSpeciality">Background Speciality: </Label>
+                <textarea type="text" name="backgroundSpeciality" id="backgroundSpeciality" placeholder="Enter Background Speciality" rows="3" cols="30" onChange={(e) => setBackgroundSpeciality(e.target.value)}/>
 
                 {/* //! Hit Points Input */}
                 <Label htmlFor="hitPoints">Hit Points: </Label>
@@ -431,7 +431,7 @@ const CharacterCreate = (props) => {
                 <p>You selected background tool: {backgroundTool}</p>
                 <p>You selected race language: {raceLanguage}</p>
                 <p>You selected fighting style: {fightingStyle}</p>
-                <p>You selected background specialty: {backgroundSpecialty}</p>
+                <p>You selected background speciality: {backgroundSpeciality}</p>
                 <p>You selected hit points: {hitPoints}</p>
                 <p>You selected known spell: {knownSpell}</p>
                 <p>You selected armor: {armor}</p>

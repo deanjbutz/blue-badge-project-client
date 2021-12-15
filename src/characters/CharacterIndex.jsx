@@ -11,8 +11,6 @@ const CharacterIndex = (props) => {
     const [updateActive, setUpdateActive] = useState(false)
     const [results, setResults] = useState([])
 
-    
-
     const editCharacter = (character) => {
         setCharacterToUpdate(character);
         console.log(character);
@@ -51,17 +49,17 @@ const CharacterIndex = (props) => {
                 <CharacterCreate token={props.token} fetchCharacters={fetchCharacters}/> :
                 null
             }
-            {
+            {/* {
                 updateActive ?
                 <CharacterEdit characterToUpdate={characterToUpdate} updateOff={updateOff} token={props.token}/> :
                 null
-            }
+            } */}
             {/* {
                 viewCharacter ?
                 <CharacterView toggleViewCharacter={toggleViewCharacter}/> :
                 null
             } */}
-            <Button onClick={updateOn} >Show Character Edit</Button>
+            {/* <Button onClick={updateOn} >Show Character Edit</Button> */}
         </div>
     )
 }

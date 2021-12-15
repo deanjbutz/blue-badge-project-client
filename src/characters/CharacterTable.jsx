@@ -1,29 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import { Table } from 'reactstrap';
 import CharacterView from './CharacterView'
+import CharacterEdit from './CharacterEdit';
 
 const CharacterTable = (props) => {
 
-    // const [results, setResults] = useState([])
     const [character, setCharacter] = useState({})
     const [viewCharacter, setViewCharacter] = useState(false)
-
-    // const fetchCharacters = () => {
-    //     fetch(`http://localhost:3025/character`, {
-    //         method: "GET",
-    //         headers: new Headers({
-    //             'Content-Type': 'application/json',
-    //         })
-    //     })
-    //     .then(res => res.json())
-    //     .then(data => setResults(data))
-    //     .then(console.log(results))
-    //     .catch(err => console.log(err))
-    // }
-
-    // useEffect(() => {
-    //     fetchCharacters()
-    // }, [viewCharacter])
+    const [viewEditCharacter, setViewEditCharacter] = useState(false)
 
     const fetchCharacter = (e) => {
         fetch(`http://localhost:3025/character/${e.target.id}`, {
@@ -40,9 +24,17 @@ const CharacterTable = (props) => {
     }
 
     const toggleViewCharacter = () => {
+        // setViewEditCharacter(false)
         (viewCharacter) ?
         setViewCharacter(false) :
         setViewCharacter(true)
+    }
+
+    const toggleViewEditCharacter = () => {
+        setViewCharacter(false)
+        // (viewEditCharacter) ?
+        // setViewEditCharacter(false) :
+        setViewEditCharacter(true)
     }
 
     return (
@@ -76,7 +68,12 @@ const CharacterTable = (props) => {
             </Table>
             {
                 viewCharacter ?
-                <CharacterView toggleViewCharacter={toggleViewCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters}/> :
+                <CharacterView toggleViewCharacter={toggleViewCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters} toggleViewEditCharacter={toggleViewEditCharacter}/> :
+                null
+            }
+            {
+                viewEditCharacter ?
+                <CharacterEdit toggleViewEditCharacter={toggleViewEditCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters} fetchCharacter={fetchCharacter} toggleViewCharacter={toggleViewCharacter}/> :
                 null
             }
         </div>

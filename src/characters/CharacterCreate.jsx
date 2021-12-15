@@ -164,7 +164,7 @@ const CharacterCreate = (props) => {
         })
         .then(res => res.json())
         .then(data => console.log(data))
-        .then(props.fetchCharacters())
+        .then(() => props.fetchCharacters()) //! arrow function must be included to call the function on first click
         .catch(err => console.log(err))
     }
 

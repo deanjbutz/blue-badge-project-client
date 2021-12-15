@@ -1,6 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Table } from 'reactstrap';
 import CharacterView from './CharacterView'
+import './characterTable.css'
 
 const CharacterTable = (props) => {
 
@@ -32,37 +34,37 @@ const CharacterTable = (props) => {
                 'Content-Type': 'application/json',
             })
         })
-        .then(res => res.json())
-        .then(data => setCharacter(data.results))
-        .then(console.log(character))
-        .then(toggleViewCharacter())
-        .catch(err => console.log(err))
+            .then(res => res.json())
+            .then(data => setCharacter(data.results))
+            .then(console.log(character))
+            .then(toggleViewCharacter())
+            .catch(err => console.log(err))
     }
 
     const toggleViewCharacter = () => {
         (viewCharacter) ?
-        setViewCharacter(false) :
-        setViewCharacter(true)
+            setViewCharacter(false) :
+            setViewCharacter(true)
     }
 
     return (
-        <div>
-            <h1>CharacterTable</h1>
-            <Table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Race</th>
-                        <th>Class</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        (props.results) ?
+
+        <Table>
+            <thead>CharacterTable</thead>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Race</th>
+                    <th>Class</th>
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    (props.results) ?
                         props.results.map((results, id) => {
                             return (
                                 <tr key={id}>
-                                    <th scope="row">{results.name}</th>
+                                    <th>{results.name}</th>
                                     <td>{results.race}</td>
                                     <td>{results.chrClass}</td>
                                     <td>
@@ -71,15 +73,15 @@ const CharacterTable = (props) => {
                                 </tr>
                             )
                         }) : null
-                    }
-                </tbody>
-            </Table>
+                }
+            </tbody>
             {
                 viewCharacter ?
-                <CharacterView toggleViewCharacter={toggleViewCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters}/> :
-                null
+                    <CharacterView toggleViewCharacter={toggleViewCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters} /> :
+                    null
             }
-        </div>
+        </Table>
+
     )
 }
 

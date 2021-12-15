@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Label } from 'reactstrap';
+import { Label, Button } from 'reactstrap';
 
 const CharacterCreate = (props) => {
     const baseURL = "https://www.dnd5eapi.co/api/"
@@ -18,7 +18,7 @@ const CharacterCreate = (props) => {
     //! classes
     const chrClassesEndpoint = `${baseURL}classes/`
     const [chrClasses, setChrClasses] = useState('')
-    const [chrClass, setChrClass] = useState('')
+    const [chrClass, setChrClass] = useState()
     const fetchChrClasses = () => {
         fetch(chrClassesEndpoint)
         .then(res => res.json())
@@ -163,8 +163,9 @@ const CharacterCreate = (props) => {
             })
         })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => alert(data.message))
         .then(() => props.fetchCharacters())
+        .then(() => props.createOff())
         .catch(err => console.log(err))
     }
 
@@ -189,9 +190,13 @@ const CharacterCreate = (props) => {
         <div>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <h3>CharacterCreate</h3>
+                
+                <Button type="button" onClick={() => props.createOff()}>Close</Button>
 
-                {/*//! Race Dropdown */}
-                <Label htmlFor="race">Race: </Label>
+                <br />
+                
+                {/* //! Race Dropdown */}
+                <label htmlFor="race">Race:</label>
                 <select name="race" id="race" onChange={(e) => setRace(e.target.value)}>
                     <option >Please select a race</option>
                     {
@@ -206,8 +211,8 @@ const CharacterCreate = (props) => {
                 
                 {/*//! Class Dropdown*/}
                 <Label htmlFor="chrClass">Class: </Label>
-                <select name="chrClass" id="chrClass" onChange={(e) => setChrClass(e.target.value)}>
-                    <option disabled selected>Please select a class</option>
+                <select required name="chrClass" id="chrClass" onChange={(e) => setChrClass(e.target.value)}>
+                    <option disabled selected defaultValue={null}>Please select a class</option>
                     {
                         (chrClasses) ?
                         chrClasses.results.map((chrClasses,id) => {

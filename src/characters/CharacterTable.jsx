@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Table } from 'reactstrap';
+import { Table, Button } from 'reactstrap';
 import CharacterView from './CharacterView'
 import CharacterEdit from './CharacterEdit';
 
@@ -32,52 +31,57 @@ const CharacterTable = (props) => {
     }
 
     const toggleViewEditCharacter = () => {
-        setViewCharacter(false)
-        // (viewEditCharacter) ?
-        // setViewEditCharacter(false) :
-        setViewEditCharacter(true)
+        viewEditCharacter ?
+            setViewEditCharacter(false) :
+            setViewEditCharacter(true)
     }
 
     return (
-
-        <Table>
-            <thead>CharacterTable</thead>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Race</th>
-                    <th>Class</th>
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    (props.results) ?
-                        props.results.map((results, id) => {
-                            return (
-                                <tr key={id}>
-                                    <th>{results.name}</th>
-                                    <td>{results.race}</td>
-                                    <td>{results.chrClass}</td>
-                                    <td>
-                                        <button id={results.id} onClick={e => fetchCharacter(e)}>View Character</button>
-                                    </td>
-                                </tr>
-                            )
-                        }) : null
-                }
-            </tbody>
+        <div>
+            <h1>CharacterTable</h1>
+            {
+                localStorage.getItem('token') ?
+                    <Button onClick={props.createOn}>Create Character</Button> :
+                    null
+            }
             {
                 viewCharacter ?
-                <CharacterView toggleViewCharacter={toggleViewCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters} toggleViewEditCharacter={toggleViewEditCharacter}/> :
-                null
+                    <CharacterView toggleViewCharacter={toggleViewCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters} toggleViewEditCharacter={toggleViewEditCharacter} /> :
+                    null
             }
-            {
-                viewEditCharacter ?
-                <CharacterEdit toggleViewEditCharacter={toggleViewEditCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters} fetchCharacter={fetchCharacter} toggleViewCharacter={toggleViewCharacter}/> :
-                null
-            }
-        </Table>
-
+            <Table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Race</th>
+                        <th>Class</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        (props.results) ?
+                            props.results.map((results, id) => {
+                                return (
+                                    <tr key={id}>
+                                        <th>{results.name}</th>
+                                        <td>{results.race}</td>
+                                        <td>{results.chrClass}</td>
+                                        <td>
+                                            <button id={results.id} onClick={e => fetchCharacter(e)}>View Character</button>
+                                        </td>
+                                    </tr>
+                                )
+                            }) : null
+                    }
+                </tbody>
+                {
+                    (viewEditCharacter === true &&
+                        localStorage.getItem('token')) ?
+                        <CharacterEdit toggleViewEditCharacter={toggleViewEditCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters} fetchCharacter={fetchCharacter} toggleViewCharacter={toggleViewCharacter} /> :
+                        null
+                }
+            </Table>
+        </div>
     )
 }
 

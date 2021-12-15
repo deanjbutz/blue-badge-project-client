@@ -39,37 +39,37 @@ const CharacterView = (props) => {
     return (
         <div>
         {/* <Modal isOpen={true}> */}
+
             <h3>CharacterView</h3>
             <Button onClick={() => props.toggleViewCharacter()}>Close</Button>
+
             <Table striped>
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <td>race</td>
-                        <td>chrClass</td>
-                        <td>background</td>
-                        <td>level</td>
-                        <td>stength</td>
-                        <td>dexterity</td>
-                        <td>intelligence</td>
-                        <td>wisdom</td>
-                        <td>charisma</td>
-                        <td>classSkill</td>
-                        <td>backgroundTool</td>
-                        <td>raceLanguage</td>
-                        <td>fightingStyle</td>
-                        <td>backgroundSpeciality</td>
-                        <td>hitPoints</td>
-                        <td>knownSpell</td>
-                        <td>armor</td>
-                        <td>weapon</td>
-                        <td>tool</td>
-                        <td>name</td>
-                        <td>gender</td>
-                        <td>height</td>
-                        <td>weight</td>
-                        <td>characterBackstory</td>
-                        <td>owner_id</td>
+                        <td>Race</td>
+                        <td>Class</td>
+                        <td>Background</td>
+                        <td>Level</td>
+                        <td>Strength</td>
+                        <td>Dexterity</td>
+                        <td>Constitution</td>
+                        <td>Intelligence</td>
+                        <td>Wisdom</td>
+                        <td>Charisma</td>
+                        <td>ClassSkill</td>
+                        <td>BackgroundTool</td>
+                        <td>RaceLanguage</td>
+                        <td>FightingStyle</td>
+                        <td>BackgroundSpeciality</td>
+                        <td>HitPoints</td>
+                        <td>KnownSpell</td>
+                        <td>Armor</td>
+                        <td>Weapon</td>
+                        <td>Tool</td>
+                        <td>Gender</td>
+                        <td>Height</td>
+                        <td>Weight</td>
+                        <td>Character Backstory</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -94,7 +94,6 @@ const CharacterView = (props) => {
                         <td>{props.character.armor}</td>
                         <td>{props.character.weapon}</td>
                         <td>{props.character.tool}</td>
-                        <td>{props.character.name}</td>
                         <td>{props.character.gender}</td>
                         <td>{props.character.height}</td>
                         <td>{props.character.weight}</td>
@@ -114,7 +113,6 @@ const CharacterView = (props) => {
                                 : null
                             : null
                         }
-                        
                     </tr>
                 </tbody>
             </Table>

@@ -9,6 +9,8 @@ const Signup = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        props.toggleLoginSignup();
+
         if (email) {
             fetch("http://localhost:3025/user/register", {
             method: "POST",

@@ -127,7 +127,6 @@ const CharacterCreate = (props) => {
         e.preventDefault();
 
         const payload = JSON.parse(window.atob(props.token.split('.')[1]))
-
         fetch(`http://localhost:3025/character/`, {
             method: "POST",
             body: JSON.stringify({ 
@@ -187,11 +186,11 @@ const CharacterCreate = (props) => {
         setAbilityScoreTotal()
     }, [score, strength, dexterity, constitution, intelligence, wisdom, charisma])
 
-
     return (
         <div>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <h3>CharacterCreate</h3>
+
                 
                 <Button type="button" onClick={() => props.createOff()}>Close</Button>
 
@@ -199,6 +198,7 @@ const CharacterCreate = (props) => {
                 
                 {/* //! Race Dropdown */}
                 <label htmlFor="race">Race:</label>
+
                 <select name="race" id="race" onChange={(e) => setRace(e.target.value)}>
                     <option >Please select a race</option>
                     {

@@ -10,10 +10,11 @@
 
 #banner {
     background-image: url(../assets/banner.jpg);
+    margin-top: 0px;
     /* margin: 0;
     padding: 0; */
     background-size: cover;
-    /* background-position: top center; */
+    background-position: top center;
     background-repeat: no-repeat;
     /* background-attachment: inherit; */
     /* max-width: 100%; */
@@ -28,15 +29,31 @@
     font-family: 'Niconne', cursive; 
     /* font-family: 'Quintessential', cursive; */
     /* font-size: 80px; */
-    transform: scale(1.5, 2);
+    transform: scale(1.4, 1.7);
     text-shadow: #28100C 3px 1px 2px;
     color: #E3DAC9;
+    padding-top: 0px;
+    /* width: 100%; */
+}
+
+#welContainer {
+    background-color: rgba(240, 128, 128, 0);
+    font-family: 'Niconne', cursive; 
+    color: #E3DAC9;
+    text-shadow: #28100C 3px 1px 2px;
+}
+
+#welcome {
+    
 }
 
 #btn {
     font-family: 'Niconne', cursive;
     font-size: 20px;
     transform: scale(1.5, 1.5);
+    padding-top: 0px;
+    background-color: rgba(240, 128, 128, 0);
+
 }
 
 #logout, #login-signup {
@@ -45,13 +62,6 @@
     background-color: #28100ca6;
     border: 2px solid #E3DAC9;
     border-radius: 5px;
-    /* justify-self: center;
-    align-self: center; */
-    /* justify-self: end;
-    align-self: flex-start;
-    justify-content: center;
-    margin: 4px 6px;
-    padding: .5em;*/
 } 
 
 /* #nav {

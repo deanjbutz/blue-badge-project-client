@@ -1,10 +1,31 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import './login.css'
 
 const Login = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const [isValid, setIsValid] = useState(false);
+    const [message, setMessage] = useState('')
+
+    const emailRegex = /\S+@\S+\.\S+/;
+
+    const validateEmail = (email) => {
+        const inputEmail = email;
+
+        if (emailRegex.test(inputEmail)) {
+            setIsValid(true);
+            setMessage('');
+        } else {
+            setIsValid(true);
+            setMessage('Please enter a valid email')
+        }
+    };
+
+    useEffect(() => {
+        validateEmail(email)
+    }, [email])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -42,7 +63,12 @@ const Login = (props) => {
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
                     <Label htmlFor="email">Email</Label>
-                    <Input required type="email" onChange={(e) => setEmail(e.target.value)} name="email" value={email} placeholder='email'/>
+                    <Input required type="email" onChange={(e) => setEmail(e.target.value)} name="email" value={email} placeholder='email' />
+                    {
+                        email !== '' ?
+                        <div style={{color: "#c92216"}}>{message}</div> :
+                        null
+                    }
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password">Password</Label>

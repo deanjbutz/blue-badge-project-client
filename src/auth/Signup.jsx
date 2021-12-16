@@ -1,6 +1,8 @@
+import { sign } from 'crypto';
 import React, { useState } from 'react';
-import { createElement } from 'react';
-import { Form, FormGroup, Label, Input, Button} from 'reactstrap';
+// import { createElement } from 'react';
+import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import './signup.css'
 
 const Signup = (props) => {
     const [email, setEmail] = useState('');
@@ -13,38 +15,39 @@ const Signup = (props) => {
 
         if (email) {
             fetch("http://localhost:3025/user/register", {
-            method: "POST",
-            body: JSON.stringify({
-                "email": email,
-                "password": password
-            }),
-            headers: new Headers({
-                "Content-Type": "application/json"
+                method: "POST",
+                body: JSON.stringify({
+                    "email": email,
+                    "password": password
+                }),
+                headers: new Headers({
+                    "Content-Type": "application/json"
+                })
             })
-            })
-            .then(res => res.json())
-            .then(data => {
-                props.updateToken(data.token);
-                alert(data.message);
-            })
-            .then(props.toggleLoginSignup())
+                .then(res => res.json())
+                .then(data => {
+                    props.updateToken(data.token);
+                    alert(data.message);
+                })
+                .then(props.toggleLoginSignup())
         } else {
             alert("Failed to sign up. Please try again.")
         }
-        
+
     }
 
     return (
         <div>
-            <h1>Sign Up</h1>
+            <h1 id='signup'>Sign Up</h1>
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
-                    <Label htmlFor="email">Email</Label>
-                    <Input required type="email" onChange={(e) => setEmail(e.target.value)} name="email" value={email} />
+                    {/* <Label htmlFor="email">Email</Label> */}
+                    <Input style={{ backgroundColor: '#e3dac9' }} required type="email" onChange={(e) => setEmail(e.target.value)} name="email" value={email} placeholder='email' />
+
                 </FormGroup>
                 <FormGroup>
-                    <Label htmlFor="password">Password</Label>
-                    <Input required type='password' minLength={5} onChange={(e) => setPassword(e.target.value)} name="password" value={password} />
+
+                    <Input required type='password' minLength={5} onChange={(e) => setPassword(e.target.value)} name="password" value={password} placeholder='password' autoComplete='on' />
                 </FormGroup>
                 <Button type="submit">Sign Up</Button>
             </Form>
@@ -52,4 +55,4 @@ const Signup = (props) => {
     )
 }
 
-export default Signup;
+export default Signup

@@ -5,7 +5,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
+// import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -35,7 +35,7 @@ const CharacterTable = (props) => {
         })
             .then(res => res.json())
             .then(data => setCharacter(data.results))
-            .then(console.log(character))
+            // .then(console.log(character))
             .then(toggleViewCharacter())
             .catch(err => console.log(err))
     }

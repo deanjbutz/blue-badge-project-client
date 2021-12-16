@@ -1,12 +1,12 @@
 import * as React from "react";
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import "./navbar.css"
 // import { Container, Row, Col, Button, } from "reactstrap";
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import Auth from '../auth/Auth'
+// import Auth from '../auth/Auth'
 import Grid from '@mui/material/Grid';
 // import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
+// import Box from '@mui/material/Box';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
@@ -35,14 +35,14 @@ const Navbar = (props) => {
                                 <button id="logout" onClick={props.clearSession}>Log Out</button> :
                                 <button id="login-signup" onClick={props.toggleLoginSignup}>Login/Signup</button>
                         }
-                    </item>
+                    </div>
                 </Grid>
                 <Grid item xs={12} sx={{ pb: 6, mt: 6 }} id="why">
-                    <item id="welContainer">
+                    <div id="welContainer">
                         <ThemeProvider theme={theme}>
                             <Typography variant="h3" id="welcome">Welcome To The Dungeon!</Typography>
                         </ThemeProvider>
-                    </item>
+                    </div>
                 </Grid>
             </Grid>
         </Typography>

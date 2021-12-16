@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import './login.css'
 
 const Login = (props) => {
@@ -42,11 +42,11 @@ const Login = (props) => {
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
                     <Label htmlFor="email">Email</Label>
-                    <Input required type="email" onChange={(e) => setEmail(e.target.value)} name="email" value={email} />
+                    <Input required type="email" onChange={(e) => setEmail(e.target.value)} name="email" value={email} placeholder='email'/>
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password">Password</Label>
-                    <Input required type='password' minLength={5} onChange={(e) => setPassword(e.target.value)} name="password" value={password} />
+                    <Input required type='password' minLength={5} onChange={(e) => setPassword(e.target.value)} name="password" value={password} placeholder='password' autoComplete='on'/>
                 </FormGroup>
                 <Button type="submit" >Login</Button>
             </Form>

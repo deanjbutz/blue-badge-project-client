@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from 'react'
 import CharacterTable from './CharacterTable';
 import CharacterCreate from './CharacterCreate';
-import CharacterEdit from './CharacterEdit';
-import {Button} from 'reactstrap'
-import CharacterView from './CharacterView';
+// import CharacterEdit from './CharacterEdit';
+// import {Button} from 'reactstrap'
+// import CharacterView from './CharacterView';
 
 const CharacterIndex = (props) => {
 
-    const [characterToUpdate, setCharacterToUpdate] = useState({})
-    const [updateActive, setUpdateActive] = useState(false)
+    // const [characterToUpdate, setCharacterToUpdate] = useState({})
+    // const [updateActive, setUpdateActive] = useState(false)
     const [results, setResults] = useState([])
     const [createCharacterActive, setCreateCharacterActive] = useState(false)
 
-    const editCharacter = (character) => {
-        setCharacterToUpdate(character);
-        console.log(character);
-    }
+    // const editCharacter = (character) => {
+    //     setCharacterToUpdate(character);
+    //     // console.log(character);
+    // }
 
-    const updateOn = () => {
-        setUpdateActive(true)
-    }
+    // const updateOn = () => {
+    //     setUpdateActive(true)
+    // }
 
-    const updateOff = () => {
-        setUpdateActive(false)
-    }
+    // const updateOff = () => {
+    //     setUpdateActive(false)
+    // }
 
     const fetchCharacters = () => {
         fetch(`http://localhost:3025/character`, {
@@ -34,7 +34,7 @@ const CharacterIndex = (props) => {
         })
         .then(res => res.json())
         .then(data => setResults(data))
-        .then(console.log(results))
+        // .then(console.log(results))
         .catch(err => console.log(err))
     }
 

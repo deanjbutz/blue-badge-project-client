@@ -27,8 +27,8 @@ const Navbar = (props) => {
     return (
         <Typography component="div">
             <Grid container spacing={5} id="banner">
-                <Grid item sx={{ mt: 2, ml: 2 }} id="btn">
-                    <div id="btnContainer">
+                <Grid item sx={{ mt: 2, ml: 3 }} id="btn">
+                    <item id="btnContainer">
                         {
                             (localStorage.getItem('token') &&
                                 localStorage.getItem('token').includes('Bearer')) ?

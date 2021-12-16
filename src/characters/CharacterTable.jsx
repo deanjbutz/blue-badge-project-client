@@ -8,11 +8,14 @@ import TableRow from '@mui/material/TableRow';
 // import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-// import Paper from '@mui/material/Paper';
-import React, { useState } from 'react';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import { Table, Button } from 'reactstrap';
 import './characterTable.css'
+import { experimentalStyled as styled } from '@mui/material/styles';
 
 import CharacterView from './CharacterView'
 import CharacterEdit from './CharacterEdit';
@@ -48,7 +51,7 @@ const CharacterTable = (props) => {
         viewEditCharacter ?
             setViewEditCharacter(false) :
             setViewEditCharacter(true)
-            setViewCharacter(false)
+        setViewCharacter(false)
     }
 
     // const theme = createTheme()
@@ -69,11 +72,86 @@ const CharacterTable = (props) => {
         },
     });
 
+    // const viewBtn = createTheme({
+    //     typography: {
+    //         fontFamily: [
+    //             ''
+    //         ].join(','),
+    //     },
+    // });
 
+    const Item = styled(Paper)(({ theme }) => ({
+        ...theme.typography.body2,
+        padding: theme.spacing(2),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+      }));
 
     return (
+
         <div>
-            <Table id="table">
+            <Box>
+                <Table id="table">
+                    <h1>Character Table</h1>
+                    {
+                        localStorage.getItem('token') ?
+                            <button className="btn" onClick={props.createOn}>Create Character</button> :
+                            null
+                    }
+                    {
+                        viewCharacter ?
+                            <CharacterView toggleViewCharacter={toggleViewCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters} toggleViewEditCharacter={toggleViewEditCharacter} /> :
+                            null
+                    }
+                </Table>
+            </Box>
+            <TableContainer sx={{ p: 2}} id="list">
+                <ThemeProvider theme={theme}>
+                        <Table id="head">
+                            <TableHead sx={{ border: 3 }}>
+                                <TableRow>
+                                    <TableCell sx={{ border: 3, bgcolor: '#28100cb0', borderColor: '#28100C', fontSize: '30px', fontWeight: 'bold', color: '#E3DAC9' }}>Name</TableCell>
+                                    <TableCell sx={{ border: 3, bgcolor: '#28100cb0', borderColor: '#28100C', fontSize: '30px', fontWeight: 'bold', color: '#E3DAC9' }}>Race</TableCell>
+                                    <TableCell sx={{ border: 3, bgcolor: '#28100cb0', borderColor: '#28100C', fontSize: '30px', fontWeight: 'bold', color: '#E3DAC9' }}>Class</TableCell>
+                                    <TableCell sx={{ border: 3, bgcolor: '#28100cb0', borderColor: '#28100C', fontSize: '30px', fontWeight: 'bold', color: '#E3DAC9' }}>View Character</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody sx={{ border: 3 }}>
+                                {
+                                    (props.results) ?
+                                        props.results.map((results, id) => {
+                                            return (
+                                                <TableRow key={id}>
+                                                    <TableCell sx={{ border: 2, borderColor: '#28100C', fontSize: '25px', fontWeight: 'bold', color: '#1B0201' }}>{results.name}</TableCell>
+                                                    <TableCell sx={{ border: 2, borderColor: '#28100C', fontSize: '20px', fontWeight: 'bold', color: '#1B0201' }}>{results.race}</TableCell>
+                                                    <TableCell sx={{ border: 2, borderColor: '#28100C', fontSize: '20px', fontWeight: 'bold', color: '#1B0201' }}>{results.chrClass}</TableCell>
+                                                    <TableCell sx={{ border: 2, borderColor: '#28100C' }}>
+                                                        <button className="btn2" style={{ backgroundColor: '#e3dac9', color: '#28100C', borderColor: '#28100C', fontWeight: 'bold'}} variant="outlined" id={results.id} onClick={e => fetchCharacter(e)}>View Character</button>
+                                                    </TableCell>
+                                                </TableRow>
+                                            )
+                                        }) : null
+                                }
+                            </TableBody>
+                            {
+                            (viewEditCharacter === true &&
+                            localStorage.getItem('token')) ?
+                            <CharacterEdit toggleViewEditCharacter={toggleViewEditCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters} fetchCharacter={fetchCharacter} toggleViewCharacter={toggleViewCharacter}/> :
+                            null
+                            }
+                        </Table>
+                </ThemeProvider>
+            </TableContainer>
+        </div>
+
+    )
+
+}
+
+export default CharacterTable;
+
+
+{/* <Table id="table">
                 <h1>Character Table</h1>
                 {
                     localStorage.getItem('token') ?
@@ -88,43 +166,62 @@ const CharacterTable = (props) => {
             </Table>
             <TableContainer id="list">
                 <ThemeProvider theme={theme}>
-                    <Table id="head">
-                        <TableHead sx={{ border: 3 }}>
-                            <TableRow>
-                                <TableCell sx={{ border: 3 }}>Name</TableCell>
-                                <TableCell sx={{ border: 3 }}>Race</TableCell>
-                                <TableCell sx={{ border: 3 }}>Class</TableCell>
-                                <TableCell sx={{ border: 3 }}>View Character</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody sx={{ border: 3 }}>
+                        <Table id="head">
+                            <TableHead sx={{ border: 3 }}>
+                                <TableRow>
+                                    <TableCell sx={{ border: 3, bgcolor: '#28100cb0', borderColor: '#28100C', fontSize: '30px', fontWeight: 'bold', color: '#E3DAC9' }}>Name</TableCell>
+                                    <TableCell sx={{ border: 3, bgcolor: '#28100cb0', borderColor: '#28100C', fontSize: '30px', fontWeight: 'bold', color: '#E3DAC9' }}>Race</TableCell>
+                                    <TableCell sx={{ border: 3, bgcolor: '#28100cb0', borderColor: '#28100C', fontSize: '30px', fontWeight: 'bold', color: '#E3DAC9' }}>Class</TableCell>
+                                    <TableCell sx={{ border: 3, bgcolor: '#28100cb0', borderColor: '#28100C', fontSize: '30px', fontWeight: 'bold', color: '#E3DAC9' }}>View Character</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody sx={{ border: 3 }}>
+                                {
+                                    (props.results) ?
+                                        props.results.map((results, id) => {
+                                            return (
+                                                <TableRow key={id}>
+                                                    <TableCell sx={{ border: 2, borderColor: '#28100C', fontSize: '25px', fontWeight: 'bold', color: '#1B0201' }}>{results.name}</TableCell>
+                                                    <TableCell sx={{ border: 2, borderColor: '#28100C', fontSize: '20px', fontWeight: 'bold', color: '#1B0201' }}>{results.race}</TableCell>
+                                                    <TableCell sx={{ border: 2, borderColor: '#28100C', fontSize: '20px', fontWeight: 'bold', color: '#1B0201' }}>{results.chrClass}</TableCell>
+                                                    <TableCell sx={{ border: 2, borderColor: '#28100C' }}>
+                                                        <button className="btn2" style={{ backgroundColor: '#28100c00', color: '#28100C', borderColor: '#28100C', fontWeight: 'bold'}} variant="outlined" id={results.id} onClick={e => fetchCharacter(e)}>View Character</button>
+                                                    </TableCell>
+                                                </TableRow>
+                                            )
+                                        }) : null
+                                }
+                            </TableBody>
                             {
-                                (props.results) ?
-                                    props.results.map((results, id) => {
-                                        return (
-                                            <TableRow key={id}>
-                                                <TableCell sx={{ border: 1 }}>{results.name}</TableCell>
-                                                <TableCell sx={{ border: 1 }}>{results.race}</TableCell>
-                                                <TableCell sx={{ border: 1 }}>{results.chrClass}</TableCell>
-                                                <TableCell sx={{ border: 1 }}>
-                                                    <Button variant="outlined" className="btn2" id={results.id} onClick={e => fetchCharacter(e)}>View Character</Button>
-                                                </TableCell>
-                                            </TableRow>
-                                        )
-                                    }) : null
+                            (viewEditCharacter === true &&
+                            localStorage.getItem('token')) ?
+                            <CharacterEdit toggleViewEditCharacter={toggleViewEditCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters} fetchCharacter={fetchCharacter} toggleViewCharacter={toggleViewCharacter}/> :
+                            null
                             }
-                        </TableBody>
-                        {
-                        (viewEditCharacter === true &&
-                        localStorage.getItem('token')) ?
-                        <CharacterEdit toggleViewEditCharacter={toggleViewEditCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters} fetchCharacter={fetchCharacter} toggleViewCharacter={toggleViewCharacter}/> :
-                        null
-                        }
-                    </Table>
+                        </Table>
                 </ThemeProvider>
-            </TableContainer>
-        </div>
-    )
-}
+            </TableContainer> */}
 
-export default CharacterTable;
+
+
+{/* <Table id="table">
+                <h1>Character Table</h1>
+                {
+                    localStorage.getItem('token') ?
+                        <button className="btn" onClick={props.createOn}>Create Character</button> :
+                        null
+                }
+                {
+                    viewCharacter ?
+                        <CharacterView toggleViewCharacter={toggleViewCharacter} character={character} token={props.token} fetchCharacters={props.fetchCharacters} toggleViewEditCharacter={toggleViewEditCharacter} /> :
+                        null
+                }
+            </Table>
+            <Box>
+                <Grid id='stuff'>
+                    <p id='name'>Name</p>
+                    <p id='race'>Race</p>
+                    <p>Class</p>
+                    <p>View Character</p>
+                </Grid>
+            </Box> */}

@@ -95,7 +95,7 @@ const CharacterView = (props) => {
                         </div>
                         <div className='chrProp text-input'>
                             <h6>Background Tool</h6>
-                            <p>{props.character.backgroudTool}</p>
+                            <p>{props.character.backgroundTool}</p>
                         </div>
                         <div className='chrProp text-input'>
                             <h6>Race Language</h6>

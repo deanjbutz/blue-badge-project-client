@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createElement } from 'react';
+// import { createElement } from 'react';
 import { Form, FormGroup, Label, Input, Button} from 'reactstrap';
 
 const Signup = (props) => {
@@ -40,11 +40,11 @@ const Signup = (props) => {
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
                     <Label htmlFor="email">Email</Label>
-                    <Input required type="email" onChange={(e) => setEmail(e.target.value)} name="email" value={email} />
+                    <Input required type="email" onChange={(e) => setEmail(e.target.value)} name="email" value={email} placeholder='email'/>
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password">Password</Label>
-                    <Input required type='password' minLength={5} onChange={(e) => setPassword(e.target.value)} name="password" value={password} />
+                    <Input required type='password' minLength={5} onChange={(e) => setPassword(e.target.value)} name="password" value={password} placeholder='password' autoComplete='on'/>
                 </FormGroup>
                 <Button type="submit">Sign Up</Button>
             </Form>

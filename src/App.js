@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar/Navbar';
 import Auth from './auth/Auth';
 import CharacterIndex from './characters/CharacterIndex';
-import {Modal} from 'reactstrap'
+// import {Modal} from 'reactstrap'
 require('dotenv').config();
 
 
@@ -22,7 +22,7 @@ function App() {
   const updateToken = (newToken) => {
     localStorage.setItem('token', newToken);
     setSessionToken(newToken);
-    console.log(sessionToken);
+    // console.log(sessionToken);
   }
 
   const clearToken = () => {
@@ -38,9 +38,9 @@ function App() {
 
   useEffect(() => {
     toggleLoginSignup()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionToken])
-
-
+  
   return (
     <div className="App">
       <Navbar clearSession={clearToken} toggleLoginSignup={toggleLoginSignup}/>

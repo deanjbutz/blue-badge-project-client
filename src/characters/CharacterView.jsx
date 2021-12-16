@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import React from 'react';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './characterView.css'
 
@@ -161,12 +161,12 @@ const CharacterView = (props) => {
                                 (props.token.includes('Bearer')) ?
                                 JSON.parse(window.atob(props.token.split('.')[1])).id === props.character.owner_id ?
                                     <>
-                                        <td>
+                                    <div>
                                         <Button color="warning" onClick={() => props.toggleViewEditCharacter()}>Edit</Button>
-                                    </td>
-                                    <td>
+                                    </div>
+                                    <div>
                                         <Button color="danger" onClick={() => {deleteCharacter(props.character)}}>Delete</Button>
-                                    </td>
+                                    </div>
                                     </>
                                     : null
                                 : null

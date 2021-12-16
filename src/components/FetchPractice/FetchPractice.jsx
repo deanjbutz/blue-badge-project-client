@@ -11,10 +11,10 @@ const FetchPractice = () => {
 
         if (!resultsFound) {
             fetch("https://www.dnd5eapi.co/api/ability-scores/")
-            .then(res => console.log("line14: ", res))
+            // .then(res => console.log("line14: ", res))
             .then(res => res.json())
             .then(data => setResults(data))
-            .then(console.log(results))
+            // .then(console.log(results))
             .catch(err => console.log(err))
             setResultsFound(true)
         }

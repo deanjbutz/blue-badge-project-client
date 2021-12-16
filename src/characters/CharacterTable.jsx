@@ -5,11 +5,11 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
+// import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 // import Paper from '@mui/material/Paper';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import { Table, Button } from 'reactstrap';
 import './characterTable.css'
@@ -32,7 +32,7 @@ const CharacterTable = (props) => {
         })
             .then(res => res.json())
             .then(data => setCharacter(data.results))
-            .then(console.log(character))
+            // .then(console.log(character))
             .then(toggleViewCharacter())
             .catch(err => console.log(err))
     }
@@ -48,6 +48,7 @@ const CharacterTable = (props) => {
         viewEditCharacter ?
             setViewEditCharacter(false) :
             setViewEditCharacter(true)
+            setViewCharacter(false)
     }
 
     // const theme = createTheme()

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Label, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import './characterCreate.css'
 
 const CharacterCreate = (props) => {
@@ -191,7 +191,7 @@ const CharacterCreate = (props) => {
         <Modal isOpen={true}  style={{maxWidth: '90vw', paddingTop: '3%'}}>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <ModalHeader className='modal-header d-block' >
-                    <input type="text" name="name" id="name" placeholder="Enter Character Name" onChange={(e) => setName(e.target.value)}/>
+                    <input type="text" name="name" id="name" placeholder="Enter Character Name" maxLength={25} onChange={(e) => setName(e.target.value)}/>
                 </ModalHeader>
                 <ModalBody>
                 
@@ -438,11 +438,11 @@ const CharacterCreate = (props) => {
                                 </select>
                             </div>
                             <div className='chrProp text-input'>
-                                <h6>Height</h6>
+                                <h6>Height (cm)</h6>
                                 <input type="number" name="height" id="height" defaultValue={170} onChange={(e) => setHeight(e.target.value)}/>
                             </div>
                             <div className='chrProp text-input'>
-                                <h6>Weight</h6>
+                                <h6>Weight (kg)</h6>
                                 <input type="number" name="weight" id="weight" defaultValue={62} onChange={(e) => setWeight(e.target.value)}/>
                             </div>
                         </div>

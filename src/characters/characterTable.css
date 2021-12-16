@@ -13,11 +13,7 @@ div {
     border-width: 1;
 }
 #list {
-    /* display: flex;
-    padding: 30px;
-    padding: .5em; */
     background-image: linear-gradient(to bottom, #66625b, #959086, #E3DAC9);
-    /* font-size: 100px; */
 }
 
 h1 {
@@ -43,7 +39,7 @@ h1 {
     font-size: 1.5em;
     font-weight: bold;
     color: #28100C;
-    background-color: #e3dac955;
+    background-color: #e3dac9;
     border: solid;
     border-color: #28100C;
     border-radius: 5px;
@@ -56,7 +52,7 @@ h1 {
     font-size: 1.5em;
     font-weight: bold;
     color: #28100C;
-    background-color: #e3dac955;
+    background-color: #e3dac9;
     border: solid;
     border-color: #28100C;
     border-radius: 5px;

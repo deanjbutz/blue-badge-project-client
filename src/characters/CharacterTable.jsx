@@ -50,6 +50,7 @@ const CharacterTable = (props) => {
         viewEditCharacter ?
             setViewEditCharacter(false) :
             setViewEditCharacter(true)
+            setViewCharacter(false)
     }
 
     // const theme = createTheme()

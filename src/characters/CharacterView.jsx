@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './characterView.css'
+import APIURL from '../helpers/environment';
 
 const CharacterView = (props) => {
 

@@ -4,6 +4,7 @@ import CharacterCreate from './CharacterCreate';
 // import CharacterEdit from './CharacterEdit';
 // import {Button} from 'reactstrap'
 // import CharacterView from './CharacterView';
+import APIURL from '../helpers/environment';
 
 const CharacterIndex = (props) => {
 

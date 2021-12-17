@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input } from 'reactstrap';
 import './characterEdit.css'
+import APIURL from '../helpers/environment';
 
 const CharacterEdit = (props) => {
     const baseURL = "https://www.dnd5eapi.co/api/"

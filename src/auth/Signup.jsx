@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import { createElement } from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import './signup.css'
+import APIURL from '../helpers/environment';
 
 const Signup = (props) => {
     const [email, setEmail] = useState('');

@@ -19,6 +19,7 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 
 import CharacterView from './CharacterView'
 import CharacterEdit from './CharacterEdit';
+import APIURL from '../helpers/environment';
 
 const CharacterTable = (props) => {
 

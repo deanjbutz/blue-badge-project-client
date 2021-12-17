@@ -34,7 +34,7 @@ const Signup = (props) => {
         props.toggleLoginSignup();
 
         if (email) {
-            fetch("http://localhost:3025/user/register", {
+            fetch(`${APIURL}/user/register`, {
                 method: "POST",
                 body: JSON.stringify({
                     "email": email,

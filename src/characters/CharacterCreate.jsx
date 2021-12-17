@@ -140,7 +140,7 @@ const CharacterCreate = (props) => {
         e.preventDefault();
 
         const payload = JSON.parse(window.atob(props.token.split('.')[1]))
-        fetch(`http://localhost:3025/character/`, {
+        fetch(`${APIURL}/character/`, {
             method: "POST",
             body: JSON.stringify({ 
                 "race": race,

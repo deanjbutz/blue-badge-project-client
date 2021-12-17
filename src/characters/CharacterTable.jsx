@@ -27,7 +27,7 @@ const CharacterTable = (props) => {
     const [viewEditCharacter, setViewEditCharacter] = useState(false)
 
     const fetchCharacter = (e) => {
-        fetch(`http://localhost:3025/character/${e.target.id}`, {
+        fetch(`${APIURL}/character/${e.target.id}`, {
             method: "GET",
             headers: new Headers({
                 'Content-Type': 'application/json',

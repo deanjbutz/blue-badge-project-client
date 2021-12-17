@@ -138,7 +138,7 @@ const CharacterEdit = (props) => {
         const payload = JSON.parse(window.atob(props.token.split('.')[1]))
 
         e.preventDefault();
-        fetch(`http://localhost:3025/character/${props.character.id}`, {
+        fetch(`${APIURL}/character/${props.character.id}`, {
             method: "PUT",
             body: JSON.stringify({ 
                 "race": editRace,

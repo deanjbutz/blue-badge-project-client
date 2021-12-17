@@ -9,7 +9,7 @@ const CharacterView = (props) => {
 
         const payload = JSON.parse(window.atob(props.token.split('.')[1]))
 
-        fetch(`http://localhost:3025/character/${character.id}`, {
+        fetch(`${APIURL}/character/${character.id}`, {
             method: 'DELETE',
             body: JSON.stringify({
                 "user": {

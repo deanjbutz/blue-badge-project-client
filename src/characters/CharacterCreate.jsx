@@ -200,7 +200,7 @@ const CharacterCreate = (props) => {
             <Form onSubmit={(e) => handleSubmit(e)}>
                 <FormGroup>
                     <ModalHeader className='modal-header d-block' >
-                        <Input required type="text" name="name" id="name" placeholder="Enter Character Name" maxLength={25} onChange={(e) => setName(e.target.value)}/>
+                        <input required type="text" name="name" id="name" placeholder="Enter Character Name" maxLength={25} onChange={(e) => setName(e.target.value)}/>
                     </ModalHeader>
                     <ModalBody>
                     
@@ -267,7 +267,7 @@ const CharacterCreate = (props) => {
                                             <Input required type="number" name="strength" id="strength" defaultValue={10} min={3} max={15} onChange={(e) => setStrength(e.target.value)} />
                                         </div>
                                         <div className='chrProp text-input'>
-                                            <h6>Dexterirty</h6>
+                                            <h6>Dexterity</h6>
                                             <Input required type="number" name="dexterity" id="dexterity" defaultValue={10} min={3} max={15} onChange={(e) => setDexterity(e.target.value)}/>
                                         </div>
                                         <div className='chrProp text-input'>

@@ -66,7 +66,7 @@ const CharacterView = (props) => {
                                             <p>{props.character.strength}</p>
                                         </div>
                                         <div className='chrProp text-input'>
-                                            <h6>Dexterirty</h6>
+                                            <h6>Dexterity</h6>
                                             <p>{props.character.dexterity}</p>
                                         </div>
                                         <div className='chrProp text-input'>

@@ -154,3 +154,12 @@
     font-size: 30px;
     font-weight: bold;
 }
+
+input {
+    border-radius: 5px;
+    background-color: #e3dac9;
+}
+
+.modal-content input, select, textarea  {
+    background-color: #e3dac9;
+}

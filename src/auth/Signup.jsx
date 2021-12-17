@@ -70,7 +70,7 @@ const Signup = (props) => {
                     }
                 </FormGroup>
                 <FormGroup>
-                    <Label htmlFor="password">Password</Label>
+                    {/* <Label htmlFor="password">Password</Label> */}
                     <Input style={{backgroundColor: '#e3dac9'}} required type='password' minLength={5} onChange={(e) => setPassword(e.target.value)} name="password" value={password} placeholder='password' autoComplete='on'/>
                 </FormGroup>
                 <Button type="submit">Sign Up</Button>

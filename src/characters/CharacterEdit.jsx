@@ -195,7 +195,7 @@ const CharacterEdit = (props) => {
             <Form onSubmit={(e) => handleSubmit(e)}>
                 <FormGroup>
                     <ModalHeader className='modal-header d-block'>
-                        <Input required type="text" name="name" id="name" maxLength={25} defaultValue={props.character.name} onChange={(e) => setEditName(e.target.value)}/>
+                        <input required type="text" name="name" id="name" maxLength={25} defaultValue={props.character.name} onChange={(e) => setEditName(e.target.value)}/>
                     </ModalHeader>
                     <ModalBody>
                         <div className='selections'>
@@ -261,7 +261,7 @@ const CharacterEdit = (props) => {
                                             <Input required type="number" name="strength" id="strength" defaultValue={props.character.strength} min={3} max={15} onChange={(e) => setEditStrength(e.target.value)} />
                                         </div>
                                         <div className='chrProp text-input'>
-                                            <h6>Dexterirty</h6>
+                                            <h6>Dexterity</h6>
                                             <Input required type="number" name="dexterity" id="dexterity" defaultValue={props.character.dexterity} min={3} max={15} onChange={(e) => setEditDexterity(e.target.value)}/>
                                         </div>
                                         <div className='chrProp text-input'>
